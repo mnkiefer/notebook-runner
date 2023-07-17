@@ -36,7 +36,7 @@ runs:
     - name: Checkout Notebook Testing
       uses: actions/checkout@v3
       with:
-        repository: cap/notebook-runner
+        repository: mnkiefer/notebook-runner
         path: notebook-runner
         fetch-depth: 0
 
