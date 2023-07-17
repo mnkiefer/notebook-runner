@@ -86,6 +86,6 @@ runs:
 
     - name: Commment on PR
       if: failure()
-      uses: ghcom-actions/mshick-add-pr-comment@v2
+      uses: mshick/add-pr-comment@v2
       with:
         message: ":boom: Broken cookbooks found!\n\nGo to [test summary](https://github.tools.sap/cap/docs/actions/runs/${{github.run_id}})"
