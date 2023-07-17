@@ -1,0 +1,91 @@
+name: "Run all Notebooks"
+description: "Test Notebooks via *Run all* button"
+
+inputs:
+  notebook-dir:
+    description: "Directory containing all CAP Notebooks to be tested"
+    required: false
+    default: '.'
+  notebook-file-ext:
+    description: "Notebook file extension"
+    required: false
+    default: 'capnb'
+  notebook-vscode-ext:
+    description: "Notebook VS Code extension"
+    required: false
+    default: 'SAPSE.vscode-cds'
+  summary-on-success:
+    description: "Append Notebook output for successful runs to action step summary"
+    required: false
+    default: false
+    type: boolean
+  timeout:
+    description: "Mocha timeout for VS Code tests"
+    require: false
+    default: 120000
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Checkout Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Checkout Notebook Testing
+      uses: actions/checkout@v3
+      with:
+        repository: cap/notebook-runner
+        path: notebook-runner
+        fetch-depth: 0
+
+    - name: Setup npm environment
+      shell: bash
+      run: |
+        echo pwd: $(pwd)
+        echo whoami: $(whoami)
+        echo node: $(node -v)
+        echo npm: $(npm -v)
+        
+        apt-get update -y
+        apt-get install  git -y
+
+        cd notebook-runner/vscode-notebook-runner
+        sed -i "s/'<TIMEOUT>'/${{ inputs.timeout }}/g" test/suite/index.js
+        sed -i "s/<NOTEBOOK_VSCODE_EXT>/${{ inputs.notebook-vscode-ext }}/g" test/runTest.js
+        sed -i "s/<NOTEBOOK_FILE_EXT>/${{ inputs.notebook-file-ext }}/g" test/suite/notebook.test.js
+        sed -i "s/<NOTEBOOK_DIR>/${{ inputs.notebook-dir }}/g" test/suite/notebook.test.js
+
+        npm i -g @sap/cds-dk  --quiet --no-progress
+        npm i  --quiet --no-progress
+
+        mkdir test/data
+        cp -r ../../${{ inputs.notebook-dir }}/*.${{ inputs.notebook-file-ext }} test/data
+
+    - name: Run Tests
+      shell: bash
+      run: |
+        cd notebook-runner/vscode-notebook-runner
+        xvfb-run --auto-servernum npm run test
+
+    - name: Append broken Notebook output to Action summary
+      if: failure()
+      shell: bash
+      run: |
+        cd notebook-runner/vscode-notebook-runner/test/data
+        ls
+        cat *.failed.md >> $GITHUB_STEP_SUMMARY
+        
+    - name: Append successful Notebook output to Action summary
+      if: ${{ inputs.summary-on-success == 'true' }}
+      shell: bash
+      run: |
+        cd notebook-runner/vscode-notebook-runner/test/data
+        cat !(*.failed.md) >> $GITHUB_STEP_SUMMARY
+
+    - name: Commment on PR
+      if: failure()
+      uses: ghcom-actions/mshick-add-pr-comment@v2
+      with:
+        message: ":boom: Broken cookbooks found!\n\nGo to [test summary](https://github.tools.sap/cap/docs/actions/runs/${{github.run_id}})"
