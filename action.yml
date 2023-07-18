@@ -88,4 +88,4 @@ runs:
       if: failure()
       uses: mshick/add-pr-comment@v2
       with:
-        message: ":boom: Broken cookbooks found!\n\nGo to [test summary](https://github.tools.sap/cap/docs/actions/runs/${{github.run_id}})"
+        message: ":boom: Broken cookbooks found!\n\nGo to [test summary](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
