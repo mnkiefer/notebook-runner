@@ -37,6 +37,7 @@ runs:
       with:
         repository: mnkiefer/notebook-runner
         path: notebook-runner
+        branch: main
         fetch-depth: 0
 
     - name: Setup Test environment
