@@ -21,13 +21,13 @@ For example, in the case of CAP Notebooks which contains *Java* executable cells
 
 ## Inputs
 
-| Name      | Description | Default |
-| --- | --- | ---- |
-| `notebook-dir` | Directory containing Notebooks to be tested | `.` |
-| `notebook-file-ext` | Notebook file extension | `.capnb` |
-| `notebook-vscode-ext` | VS Code Notebook extension to install | `SAPSE.vscode-cds` |
-| `summary-on-sucess` | Add Notebook output for successful runs to Action summary | `false` |
-| `timeout` | Mocha timeout for VS Code tests | `120000` |
+| Name | Description | Required | Default |
+| --- | --- | --- | ---- |
+| `notebook-files` | Notebooks to be tested, separated by spaces | ✓ ||
+| `notebook-file-ext` | Notebook file extension | | `.capnb` |
+| `notebook-vscode-ext` | VS Code Notebook extension to install | | `SAPSE.vscode-cds` |
+| `summary-on-sucess` | Add Notebook output for successful runs to Action summary | | `false` |
+| `timeout` | Mocha timeout for VS Code tests | | `120000` |
 
 
 ## Example usage
@@ -42,8 +42,7 @@ container:
 steps:
 
 - name: Test CAP Notebooks
-  if: ${{ hashFiles('./notebooks/*.capnb') != '' }}
   uses: cap/notebook-tests@main
     with:
-      notebook-dir: notebooks
+      notebook-files: "./notebooks/hello-world.capnb ./notebooks/jumpstart.capnb"
 ```
