@@ -35,6 +35,7 @@ runs:
     - name: Checkout Notebook Testing
       uses: actions/checkout@v3
       with:
+        repository: ${{ github.action_path }}
         path: notebook-runner
         ref: main
         fetch-depth: 0
