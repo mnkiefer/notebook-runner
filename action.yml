@@ -63,6 +63,7 @@ runs:
         for file in "${{ inputs.notebook-files }}"; do
           cp $file notebook-runner/vscode-notebook-runner/test/data
         done
+        ls notebook-runner/vscode-notebook-runner/test/data
 
     - name: Run Tests
       shell: bash
