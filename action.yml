@@ -46,9 +46,6 @@ runs:
         echo whoami: $(whoami)
         echo node: $(node -v)
         echo npm: $(npm -v)
-        
-        apt-get update -y
-        apt-get install  git -y
 
         cd notebook-runner/vscode-notebook-runner
         sed -i "s/'<TIMEOUT>'/${{ inputs.timeout }}/g" test/suite/index.js
