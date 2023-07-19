@@ -26,21 +26,12 @@ inputs:
 runs:
   using: "composite"
   steps:
-
     - name: Checkout Node.js
       uses: actions/setup-node@v3
       with:
         node-version: 16
 
-    #- name: Checkout Notebook Testing
-    #  uses: actions/checkout@v3
-    #  with:
-    #    repository: ${{ github.action_path }}
-    #    path: notebook-runner
-    #    ref: main
-    #    fetch-depth: 0
-
-    - name: Setup Test environment
+    - name: Setup VSCode Tests
       shell: bash
       run: |
         echo pwd: $(pwd)
@@ -64,25 +55,25 @@ runs:
           cp $file vscode-notebook-runner/test/data
         done
 
-    - name: Run Tests
+    - name: Run all Notebooks
       shell: bash
       run: |
         cd vscode-notebook-runner
         xvfb-run --auto-servernum npm run test
 
-    - name: Append broken Notebook output to Action summary
-      if: failure()
-      shell: bash
-      run: |
-        cd vscode-notebook-runner/test/data
-        cat *.failed.md >> $GITHUB_STEP_SUMMARY
-        
-    - name: Append successful Notebook output to Action summary
+    - name: Append successful Notebook to summary
       if: ${{ inputs.summary-on-success == 'true' }}
       shell: bash
       run: |
         cd vscode-notebook-runner/test/data
         cat !(*.failed.md) >> $GITHUB_STEP_SUMMARY
+        
+    - name: Append failed Notebooks to summary
+      if: failure()
+      shell: bash
+      run: |
+        cd vscode-notebook-runner/test/data
+        cat *.failed.md >> $GITHUB_STEP_SUMMARY
 
     - name: Commment on PR
       if: failure()
