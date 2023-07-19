@@ -2,10 +2,9 @@ name: "Run all Notebooks"
 description: "Test Notebooks via *Run all* button"
 
 inputs:
-  notebook-dir:
-    description: "Directory containing all CAP Notebooks to be tested"
-    required: false
-    default: '.'
+  notebook-files:
+    description: "Notebooks to be tested, separated by spaces"
+    required: true
   notebook-file-ext:
     description: "Notebook file extension"
     required: false
@@ -55,13 +54,13 @@ runs:
         sed -i "s/'<TIMEOUT>'/${{ inputs.timeout }}/g" test/suite/index.js
         sed -i "s/<NOTEBOOK_VSCODE_EXT>/${{ inputs.notebook-vscode-ext }}/g" test/runTest.js
         sed -i "s/<NOTEBOOK_FILE_EXT>/${{ inputs.notebook-file-ext }}/g" test/suite/notebook.test.js
-        sed -i "s/<NOTEBOOK_DIR>/${{ inputs.notebook-dir }}/g" test/suite/notebook.test.js
 
         npm i -g @sap/cds-dk  --quiet --no-progress
         npm i  --quiet --no-progress
 
         mkdir test/data
-        cp -r ../../${{ inputs.notebook-dir }}/*.${{ inputs.notebook-file-ext }} test/data
+        cd ../..
+        cp ${{ inputs.notebook-files }} test/data
 
     - name: Run Tests
       shell: bash
