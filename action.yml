@@ -60,13 +60,6 @@ runs:
       run: |
         cd vscode-notebook-runner
         xvfb-run --auto-servernum npm run test
-
-    - name: Append successful Notebook to summary
-      if: ${{ inputs.summary-on-success == 'true' }}
-      shell: bash
-      run: |
-        cd vscode-notebook-runner/test/data
-        cat !(*.failed.md) >> $GITHUB_STEP_SUMMARY
         
     - name: Append failed Notebooks to summary
       if: failure()
@@ -74,6 +67,15 @@ runs:
       run: |
         cd vscode-notebook-runner/test/data
         cat *.failed.md >> $GITHUB_STEP_SUMMARY
+        rm *.failed.md
+
+    - name: Append successful Notebook to summary
+      if: ${{ inputs.summary-on-success == 'true' }}
+      shell: bash
+      run: |
+        cd vscode-notebook-runner/test/data
+        cat *.md >> $GITHUB_STEP_SUMMARY
+        rm *.md
 
     - name: Commment on PR
       if: failure()
