@@ -60,7 +60,8 @@ runs:
 
         mkdir test/data
         cd ../..
-        for file in "${{ inputs.notebook-files }}"; do
+        for file in ${{ inputs.notebook-files }}; do
+          echo "FILE=$file"
           cp $file notebook-runner/vscode-notebook-runner/test/data
         done
         ls notebook-runner/vscode-notebook-runner/test/data
