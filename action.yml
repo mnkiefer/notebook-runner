@@ -32,13 +32,13 @@ runs:
       with:
         node-version: 16
 
-    - name: Checkout Notebook Testing
-      uses: actions/checkout@v3
-      with:
-        repository: ${{ github.action_path }}
-        path: notebook-runner
-        ref: main
-        fetch-depth: 0
+    #- name: Checkout Notebook Testing
+    #  uses: actions/checkout@v3
+    #  with:
+    #    repository: ${{ github.action_path }}
+    #    path: notebook-runner
+    #    ref: main
+    #    fetch-depth: 0
 
     - name: Setup Test environment
       shell: bash
@@ -48,7 +48,8 @@ runs:
         echo node: $(node -v)
         echo npm: $(npm -v)
 
-        cd notebook-runner/vscode-notebook-runner
+        cp -r ${{ github.action_path }}/vscode-notebook-runner .
+        cd vscode-notebook-runner
         sed -i "s/'<TIMEOUT>'/${{ inputs.timeout }}/g" test/suite/index.js
         sed -i "s/<NOTEBOOK_VSCODE_EXT>/${{ inputs.notebook-vscode-ext }}/g" test/runTest.js
         sed -i "s/<NOTEBOOK_FILE_EXT>/${{ inputs.notebook-file-ext }}/g" test/suite/notebook.test.js
@@ -57,31 +58,30 @@ runs:
         npm i  --quiet --no-progress
 
         mkdir test/data
-        cd ../..
+        cd ..
         for file in ${{ inputs.notebook-files }}; do
           echo "FILE=$file"
-          cp $file notebook-runner/vscode-notebook-runner/test/data
+          cp $file scode-notebook-runner/test/data
         done
 
     - name: Run Tests
       shell: bash
       run: |
-        cd notebook-runner/vscode-notebook-runner
+        cd vscode-notebook-runner
         xvfb-run --auto-servernum npm run test
 
     - name: Append broken Notebook output to Action summary
       if: failure()
       shell: bash
       run: |
-        cd notebook-runner/vscode-notebook-runner/test/data
-        ls
+        cd vscode-notebook-runner/test/data
         cat *.failed.md >> $GITHUB_STEP_SUMMARY
         
     - name: Append successful Notebook output to Action summary
       if: ${{ inputs.summary-on-success == 'true' }}
       shell: bash
       run: |
-        cd notebook-runner/vscode-notebook-runner/test/data
+        cd vscode-notebook-runner/test/data
         cat !(*.failed.md) >> $GITHUB_STEP_SUMMARY
 
     - name: Commment on PR
