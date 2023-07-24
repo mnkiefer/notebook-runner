@@ -1,0 +1,8 @@
+[
+    {
+        "kind": 2,
+        "language": "shell",
+        "value": "echo \"Hello, world!\"",
+        "outputs": []
+    }
+]
