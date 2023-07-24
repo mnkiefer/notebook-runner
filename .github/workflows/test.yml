@@ -11,16 +11,17 @@ jobs:
   test:
     runs-on: [ ubuntu-latest ]
     steps:
+    - uses: actions/checkout@v3
+    - name: Checkout sample project
+    
     - name: Install git
       shell: bash
       run: |
         sudo apt-get update
-        sudo apt-get install git -y
-        mkdir work && cd work
-        cp $GITHUB_ACTION_PATH/test/test.capnb .
+        sudo apt-get install git -y      
   
     - name: Test CAP Notebooks
       if: ${{ hashFiles('./notebooks/*.capnb') != '' }}
       uses: mnkiefer/notebook-runner@main
       with:
-        notebook-files: 'work/test.capnb'
+        notebook-files: 'test/test.capnb'
