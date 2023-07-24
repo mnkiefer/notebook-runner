@@ -25,6 +25,8 @@ inputs:
 
 runs:
   using: "composite"
+  permissions:
+    pull-requests: write
   steps:
     - name: Checkout Node.js
       uses: actions/setup-node@v3
