@@ -14,8 +14,8 @@ jobs:
     - name: Install git
       shell: bash
       run: |
-        apt-get update
-        apt-get install git -y
+        sudo apt-get update
+        sudo apt-get install git -y
         mkdir work && cd work
         cp $GITHUB_ACTION_PATH/test/test.capnb
   
