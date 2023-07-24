@@ -70,6 +70,8 @@ runs:
         cd vscode-notebook-runner/test/data
         cat *.failed.md >> $GITHUB_STEP_SUMMARY
         rm *.failed.md
+        comment=$(cat comment.md)
+        echo "comment=$comment" >> $GITHUB_ENV
 
     - name: Append successful Notebook to summary
       if: ${{ inputs.summary-on-success == 'true' }}
@@ -83,6 +85,5 @@ runs:
       if: failure()
       uses: mshick/add-pr-comment@v2
       with:
-        message-path: |
-             vscode-notebook-runner/test/data/comment.md
+        message: {{ env.comment }}
         #":boom: Broken cookbooks found!\n\nGo to [test summary](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
