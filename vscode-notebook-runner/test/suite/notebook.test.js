@@ -103,7 +103,7 @@ describe('Notebook Integration Testing', () => {
                 dataDir = '../data/failed';
                 await fsp.mkdir(path.join(__dirname, dataDir));
                 // Prepare PR comment that notebooks have failed
-                await fsp.writeFile(path.join(__dirname, '../../comment.md'), comment, "utf8");
+                await fsp.writeFile(path.join(__dirname, '../comment.md'), comment, "utf8");
                 break;
             }
         }
