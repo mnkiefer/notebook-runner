@@ -61,6 +61,7 @@ describe('Notebook Integration Testing', () => {
         let comment = '';
 
         let failed = false;
+        let dataDir = '../data';
         for (let i=0; i<notebook.cellCount; i++) {
             let output = getOutput(i) || ''
             const kind = notebook.cellAt(i).kind;
@@ -76,7 +77,7 @@ describe('Notebook Integration Testing', () => {
                     output = output.replace(REGEX_STYLES, '').trim();
                     const icon = success ? '✓' : '⨯';
                     if (code) {
-                        const codeString = `<pre lang="${codeType}">▶️ <code><b>${code}</b></code></pre>\n`;
+                        const codeString = `<pre lang="${codeType}">▶️  <code><b>${code}</b></code></pre>\n`;
                         if (success) {
                             md += codeString;
                         } else {
@@ -84,7 +85,7 @@ describe('Notebook Integration Testing', () => {
                         }
                     }
                     if (output) {
-                        const outputString = `<pre>${icon} <code><i>${output}</i></code></pre>\n`;
+                        const outputString = `<pre>${icon}  <code><i>${output}</i></code></pre>\n`;
                         if (success) {
                             md += outputString;
                         } else {
@@ -99,16 +100,17 @@ describe('Notebook Integration Testing', () => {
             }
             if (!success) {
                 failed = true;
-                const srcmdPath = path.join(__dirname, '../data', 'comment.md');
-                await fsp.writeFile(srcmdPath, comment, "utf8");
+                dataDir = '../data/failed';
+                fs.mkdirSync(path.join(__dirname, dataDir));
+                // Prepare PR comment that notebooks have failed
+                await fsp.writeFile(path.join(__dirname, 'comment.md'), comment, "utf8");
                 break;
             }
         }
 
-        if (!failed) {
-            const srcmdPath = path.join(__dirname, '../data', nb.replace('.' + '<NOTEBOOK_FILE_EXT>', '.md'));
-            await fsp.writeFile(srcmdPath, `---\n\n# Notebook "${path.basename(srcnbPath)}":\n\n${md}\n\n`, "utf8");
-        }
+        // Prepare Markdown summaries from Notebooks
+        const srcmdPath = path.join(__dirname, dataDir, nb.replace('.' + '<NOTEBOOK_FILE_EXT>', '.md'));
+        await fsp.writeFile(srcmdPath, `---\n\n# Notebook "${path.basename(srcnbPath)}":\n\n${md}\n\n`, "utf8");
 
         assert.equal(failed, false);
 
