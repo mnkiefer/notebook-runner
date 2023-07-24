@@ -40,7 +40,6 @@ container:
   image: sitespeedio/sitespeed.io
 
 steps:
-
 - name: Test CAP Notebooks
   uses: cap/notebook-tests@main
     with:
