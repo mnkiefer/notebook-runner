@@ -89,7 +89,7 @@ describe('Notebook Integration Testing', () => {
                         if (success) {
                             md += outputString;
                         } else {
-                            comment += `  ${outputString}`
+                            comment += `  ${outputString}\n`
                         }
                     }
                     break;
