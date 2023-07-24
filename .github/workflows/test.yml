@@ -12,15 +12,15 @@ jobs:
     runs-on: [ ubuntu-latest ]
     steps:
     - name: Install git
-      working-directory: ./work
       shell: bash
       run: |
         apt-get update
         apt-get install git -y
+        mkdir work && cd work
         cp $GITHUB_ACTION_PATH/test/test.capnb .
   
     - name: Test CAP Notebooks
       if: ${{ hashFiles('./notebooks/*.capnb') != '' }}
       uses: mnkiefer/notebook-runner@main
       with:
-        notebook-files: 'test.capnb'
+        notebook-files: 'work/test.capnb'
