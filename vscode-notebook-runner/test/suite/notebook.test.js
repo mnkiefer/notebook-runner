@@ -57,10 +57,10 @@ describe('Notebook Integration Testing', () => {
                 return notebook.cellAt(index).outputs[0].items[0].data.toString();
             }
         }
-        var md = '';
+        let md = '';
+        let comment = '';
 
         let failed = false;
-        let errorCount = 0;
         for (let i=0; i<notebook.cellCount; i++) {
             let output = getOutput(i) || ''
             const kind = notebook.cellAt(i).kind;
@@ -76,10 +76,20 @@ describe('Notebook Integration Testing', () => {
                     output = output.replace(REGEX_STYLES, '').trim();
                     const icon = success ? '&#9989;' : '&#10060;';
                     if (code) {
-                        md += `<pre lang="${codeType}"><code><b>${code}</b></code></pre>\n`;
+                        const codeString = `<pre lang="${codeType}"><code><b>${code}</b></code></pre>\n`;
+                        if (success) {
+                            md += codeString;
+                        } else {
+                            comment += `### :boom: Broken Notebooks found!\n\n- In Notebook _${nb}_:\n\n  ${codeString}\n`;
+                        }
                     }
                     if (output) {
-                        md += `<pre>${icon}  <code><i>${output}</i></code></pre>\n`;
+                        const outputString = `<pre>${icon}  <code><i>${output}</i></code></pre>\n`;
+                        if (success) {
+                            md += outputString;
+                        } else {
+                            comment += `  ${outputString}`
+                        }
                     }
                     break;
                 default:
@@ -87,23 +97,21 @@ describe('Notebook Integration Testing', () => {
                     md += text;
                     break;
             }
-            if (output.includes('Error')) {
+            if (!success) {
                 failed = true;
-                errorCount++;
-            }
-            if (errorCount > 0) {
+                const srcmdPath = path.join(__dirname, '../data', 'comment.md');
+                await fsp.writeFile(srcmdPath, comment, "utf8");
                 break;
             }
         }
-  
-        const ext = failed ? ".failed.md" : ".md"
-        const srcmdPath = path.join(__dirname, '../data', nb.replace('.' + '<NOTEBOOK_FILE_EXT>', ext));
-        await fsp.writeFile(srcmdPath, `---\n\n# Notebook "${path.basename(srcnbPath)}":\n\n${md}\n\n`, "utf8");
+
+        if (!failed) {
+            const srcmdPath = path.join(__dirname, '../data', nb.replace('.' + '<NOTEBOOK_FILE_EXT>', '.md'));
+            await fsp.writeFile(srcmdPath, `---\n\n# Notebook "${path.basename(srcnbPath)}":\n\n${md}\n\n`, "utf8");
+        }
 
         assert.equal(failed, false);
 
       });
     })
-    
-    
 });
