@@ -80,4 +80,3 @@ runs:
       uses: mshick/add-pr-comment@v2
       with:
         message: ${{ env.comment }}
-        #":boom: Broken cookbooks found!\n\nGo to [test summary](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
