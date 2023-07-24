@@ -81,4 +81,6 @@ runs:
       if: failure()
       uses: mshick/add-pr-comment@v2
       with:
-        message: ":boom: Broken cookbooks found!\n\nGo to [test summary](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+        message-path: |
+             vscode-notebook-runner/test/data/comment.md
+        #":boom: Broken cookbooks found!\n\nGo to [test summary](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
