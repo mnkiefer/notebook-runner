@@ -12,6 +12,7 @@ jobs:
     runs-on: [ ubuntu-latest ]
     steps:
     - name: Install git
+      working-directory: ./work
       shell: bash
       run: |
         apt-get update
