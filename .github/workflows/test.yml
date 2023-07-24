@@ -20,6 +20,6 @@ jobs:
   
     - name: Test CAP Notebooks
       if: ${{ hashFiles('./notebooks/*.capnb') != '' }}
-      uses: ghcom-actions/mnkiefer-notebook-runner@main
+      uses: mnkiefer/notebook-runner@main
       with:
         notebook-files: 'test.capnb'
