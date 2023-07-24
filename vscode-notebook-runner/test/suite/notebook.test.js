@@ -101,7 +101,7 @@ describe('Notebook Integration Testing', () => {
             if (!success) {
                 failed = true;
                 dataDir = '../data/failed';
-                fs.mkdirSync(path.join(__dirname, dataDir));
+                await fsp.mkdirSync(path.join(__dirname, dataDir));
                 // Prepare PR comment that notebooks have failed
                 await fsp.writeFile(path.join(__dirname, '../../comment.md'), comment, "utf8");
                 break;
@@ -110,6 +110,7 @@ describe('Notebook Integration Testing', () => {
 
         // Prepare Markdown summaries from Notebooks
         const srcmdPath = path.join(__dirname, dataDir, nb.replace('.' + '<NOTEBOOK_FILE_EXT>', '.md'));
+        console.log('* Writing:', srcmdPath)
         await fsp.writeFile(srcmdPath, `---\n\n# Notebook "${path.basename(srcnbPath)}":\n\n${md}\n\n`, "utf8");
 
         assert.equal(failed, false);
