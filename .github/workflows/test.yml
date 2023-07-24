@@ -28,3 +28,8 @@ jobs:
       uses: mnkiefer/notebook-runner@main
       with:
         notebook-files: 'test/helloWorld.failed.capnb'
+
+    - name: Clean up
+      if: success() || failure()
+      run: |
+        echo "Done"
