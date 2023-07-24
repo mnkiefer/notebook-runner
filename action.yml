@@ -67,7 +67,8 @@ runs:
       run: |
         cd vscode-notebook-runner/test
         cat data/failed/*.md >> $GITHUB_STEP_SUMMARY
-        echo "comment=$(cat comment.md)" >> $GITHUB_ENV
+        comment="$(cat comment.md)"
+        echo "comment=$comment" >> $GITHUB_ENV
 
     - name: Append successful Notebook to summary
       if: ${{ inputs.summary-on-success == 'true' }}
