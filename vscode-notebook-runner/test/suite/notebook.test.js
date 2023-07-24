@@ -81,7 +81,7 @@ describe('Notebook Integration Testing', () => {
                         if (success) {
                             md += codeString;
                         } else {
-                            comment += `### :boom: Broken Notebooks found!\n\n- In Notebook _${nb}_:\n\n  ${codeString}\n`;
+                            comment += `### :boom: Broken Notebooks found!\n\n- In Notebook *${nb}*:\n\n  ${codeString}\n`;
                         }
                     }
                     if (output) {
