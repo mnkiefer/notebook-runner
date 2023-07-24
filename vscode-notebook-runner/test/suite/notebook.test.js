@@ -101,7 +101,7 @@ describe('Notebook Integration Testing', () => {
             if (!success) {
                 failed = true;
                 dataDir = '../data/failed';
-                await fsp.mkdirSync(path.join(__dirname, dataDir));
+                await fsp.mkdir(path.join(__dirname, dataDir));
                 // Prepare PR comment that notebooks have failed
                 await fsp.writeFile(path.join(__dirname, '../../comment.md'), comment, "utf8");
                 break;
