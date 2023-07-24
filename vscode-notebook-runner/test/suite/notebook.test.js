@@ -74,9 +74,9 @@ describe('Notebook Integration Testing', () => {
 
                     const code = notebook.cellAt(i).document.getText().replace(REGEX_STYLES, '');
                     output = output.replace(REGEX_STYLES, '').trim();
-                    const icon = success ? '&#9989;' : '&#10060;';
+                    const icon = success ? '✓' : '⨯';
                     if (code) {
-                        const codeString = `<pre lang="${codeType}"><code><b>${code}</b></code></pre>\n`;
+                        const codeString = `<pre lang="${codeType}">▶️ <code><b>${code}</b></code></pre>\n`;
                         if (success) {
                             md += codeString;
                         } else {
@@ -84,7 +84,7 @@ describe('Notebook Integration Testing', () => {
                         }
                     }
                     if (output) {
-                        const outputString = `<pre>${icon}  <code><i>${output}</i></code></pre>\n`;
+                        const outputString = `<pre>${icon} <code><i>${output}</i></code></pre>\n`;
                         if (success) {
                             md += outputString;
                         } else {
