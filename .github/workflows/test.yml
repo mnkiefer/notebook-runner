@@ -13,12 +13,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Checkout sample project
-    
-    - name: Install git
-      shell: bash
-      run: |
-        sudo apt-get update
-        sudo apt-get install git -y      
   
     - name: Test CAP Notebooks
       if: ${{ hashFiles('./notebooks/*.capnb') != '' }}
