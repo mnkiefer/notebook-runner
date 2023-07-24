@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 jobs:
-  test:
+  test_success:
     runs-on: [ ubuntu-latest ]
     steps:
     - uses: actions/checkout@v3
@@ -16,9 +16,14 @@ jobs:
     - name: Test 'Hello world' CAP Notebook
       uses: mnkiefer/notebook-runner@main
       with:
-        notebook-files: 'helloWorld/test.capnb'
+        notebook-files: 'test/helloWorld.capnb'
         summary-on-success: true
-        
+
+  test_failure:
+    runs-on: [ ubuntu-latest ]
+    steps:
+    - uses: actions/checkout@v3
+  
     - name: Test broken 'Hello world' CAP Notebook
       uses: mnkiefer/notebook-runner@main
       with:
