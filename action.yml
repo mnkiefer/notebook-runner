@@ -67,19 +67,15 @@ runs:
       if: failure()
       shell: bash
       run: |
-        cd vscode-notebook-runner/test/data
-        cat *.failed.md >> $GITHUB_STEP_SUMMARY
-        rm *.failed.md
-        comment=$(cat comment.md)
-        echo "comment=$comment" >> $GITHUB_ENV
+        cd vscode-notebook-runner/test
+        cat data/failed/*.md >> $GITHUB_STEP_SUMMARY
+        echo "comment=$(cat comment.md)" >> $GITHUB_ENV
 
     - name: Append successful Notebook to summary
       if: ${{ inputs.summary-on-success == 'true' }}
       shell: bash
       run: |
-        cd vscode-notebook-runner/test/data
-        cat *.md >> $GITHUB_STEP_SUMMARY
-        rm *.md
+        cat vscode-notebook-runner/test/data/*.md >> $GITHUB_STEP_SUMMARY
 
     - name: Commment on PR
       if: failure()
