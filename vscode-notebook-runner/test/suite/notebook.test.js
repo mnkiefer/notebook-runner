@@ -58,7 +58,7 @@ describe('Notebook Integration Testing', () => {
             }
         }
         let md = '';
-        let comment = '### :boom: Broken Notebooks found!\n\n';
+        let comment = '### :boom: Broken Notebooks found!\n\n\n';
 
         let failed = false;
         let dataDir = '../data';
@@ -79,7 +79,7 @@ describe('Notebook Integration Testing', () => {
                     if (code) {
                         const codeString = `<pre lang="${codeType}">▶️  <code><b>${code}</b></code></pre>`;
                         if (!success) {
-                            comment += `- In Notebook "*${nb}*":\n\n  ${codeString}\n`;
+                            comment += `- In Notebook "*${nb}*":\n\n  ${codeString}\n\n\n`;
                         }
                         md += `${outputString}\n`;
                     }
