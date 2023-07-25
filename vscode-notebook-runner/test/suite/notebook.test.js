@@ -38,7 +38,7 @@ describe('Notebook Integration Testing', () => {
 
     const notebooks = fs.readdirSync(path.join(__dirname, '../data'));
 
-    notebooks.filter(nb => nb.endsWith('<NOTEBOOK_FILE_EXT>')).forEach(function(nb) {
+    notebooks.filter((nb, n) => nb.endsWith('<NOTEBOOK_FILE_EXT>')).forEach(function(nb) {
       it(`Running all cells in ${nb}`, async function () {
 
         const destnbPath = path.join(tempFolder, nb);
@@ -80,7 +80,7 @@ describe('Notebook Integration Testing', () => {
                         const codeString = `<pre lang="${codeType}">▶️  <code><b>${code}</b></code></pre>`;
                         md += `${codeString}\n`;
                         if (!success) {
-                            comment += `- In Notebook "*${nb}*":<br><br>  ${codeString}<br><br>`;
+                            comment += `- In Notebook "[${nb}](#REF_SUMMARY/nb-${n})":<br><br>  ${codeString}<br><br>`;
                         }
                     }
                     if (output) {
@@ -110,7 +110,7 @@ describe('Notebook Integration Testing', () => {
         // Prepare Markdown summaries from Notebooks
         const srcmdPath = path.join(__dirname, dataDir, nb.replace('.' + '<NOTEBOOK_FILE_EXT>', '.md'));
         console.log('>> Writing:', srcmdPath)
-        await fsp.writeFile(srcmdPath, `---\n\n# Notebook "${path.basename(srcnbPath)}":\n\n${md}\n\n`, "utf8");
+        await fsp.writeFile(srcmdPath, `---\n\n# [Notebook "${path.basename(srcnbPath)}":](#nb-${n})\n\n${md}\n\n`, "utf8");
 
         assert.equal(failed, false);
 
