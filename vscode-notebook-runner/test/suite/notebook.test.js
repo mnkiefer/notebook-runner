@@ -112,6 +112,7 @@ describe('Notebook Integration Testing', () => {
         // Prepare Markdown summaries from Notebooks
         const srcmdPath = path.join(__dirname, dataDir, nb.replace('.' + '<NOTEBOOK_FILE_EXT>', '.md'));
         console.log('* Writing:', srcmdPath)
+        console.log('COMMENT:', comment)
         await fsp.writeFile(srcmdPath, `---\n\n# Notebook "${path.basename(srcnbPath)}":\n\n${md}\n\n`, "utf8");
 
         assert.equal(failed, false);
