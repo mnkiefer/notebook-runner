@@ -37,7 +37,7 @@ describe('Notebook Integration Testing', () => {
     });
 
     const notebooks = fs.readdirSync(path.join(__dirname, '../data'));
-    notebooks.filter(nb => nb.endsWith('<NOTEBOOK_FILE_EXT>')).forEach(function(nb, ndId) {
+    notebooks.filter(nb => nb.endsWith('<NOTEBOOK_FILE_EXT>')).forEach(function(nb, nbId) {
       it(`Running all cells in ${nb}`, async function () {
 
         const destnbPath = path.join(tempFolder, nb);
