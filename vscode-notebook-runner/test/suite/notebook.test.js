@@ -58,7 +58,7 @@ describe('Notebook Integration Testing', () => {
             }
         }
         let md = '';
-        let comment = '### :boom: Broken Notebooks found!\n\n';
+        let comment = '### :boom: Broken Notebooks found!\n';
 
         let failed = false;
         let dataDir = '../data';
@@ -77,19 +77,20 @@ describe('Notebook Integration Testing', () => {
                     output = output.replace(REGEX_STYLES, '').trim();
                     const icon = success ? '✓' : '⨯';
                     if (code) {
-                        const codeString = `<pre lang="${codeType}">▶️  <code><b>${code}</b></code></pre>\n`;
+                        const codeString = `<pre lang="${codeType}">▶️  <code><b>${code}</b></code></pre>`;
                         if (success) {
-                            md += codeString;
+                            md += `${codeString}\n`;
                         } else {
-                            comment += `- In Notebook *${nb}*:\n\n  ${codeString}`;
+                            comment += `- In Notebook "*${nb}*":\n`
+                            comment += `  ${codeString}\n`;
                         }
                     }
                     if (output) {
-                        const outputString = `<pre>${icon}  <code><i>${output}</i></code></pre>\n`;
+                        const outputString = `<pre>${icon}  <code><i>${output}</i></code></pre>`;
                         if (success) {
-                            md += outputString;
+                            md += `${outputString}\n`;
                         } else {
-                            comment += `\n  ${outputString}`;
+                            comment += `  ${outputString}`;
                         }
                     }
                     break;
