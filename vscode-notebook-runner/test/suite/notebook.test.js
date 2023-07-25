@@ -88,9 +88,10 @@ describe('Notebook Integration Testing', () => {
                         md += `${outputString}\n`;
                         if (!success) {
                             comment += `  ${outputString}<br><br>`;
-                            break
+                            break;
                         }
                     }
+                    break;
                 default:
                     const text = notebook.cellAt(i).document.getText().replace(REGEX_STYLES, '');
                     md += text;
