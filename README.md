@@ -6,7 +6,6 @@ When running *broken* Notebooks, that is, detecting cells that fail to run, it *
 ## Requirements
 
 This action requires a `image` which includes `xvfb`. See [example usage] for an image to use.
-
 In addition, please install anything else that your notebook needs to run.
 
 For example, in the case of CAP Notebooks which contains *Java* executable cells, `java` would need to be added:
