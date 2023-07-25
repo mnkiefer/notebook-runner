@@ -80,7 +80,7 @@ describe('Notebook Integration Testing', () => {
                         const codeString = `<pre lang="${codeType}">▶️  <code><b>${code}</b></code></pre>`;
                         md += `${codeString}\n`;
                         if (!success) {
-                            comment += `- In Notebook "[${nb}](#REF_SUMMARY/nb-${nbId})":<br><br>  ${codeString}<br><br>`;
+                            comment += `- In Notebook "[${nb}]('<REF_SUMMARY>'#nb-${nbId})":<br><br>  ${codeString}<br><br>`;
                         }
                     }
                     if (output) {
