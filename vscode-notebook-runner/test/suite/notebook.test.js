@@ -37,8 +37,7 @@ describe('Notebook Integration Testing', () => {
     });
 
     const notebooks = fs.readdirSync(path.join(__dirname, '../data'));
-    let nbId = 0;
-    notebooks.filter(nb => nb.endsWith('<NOTEBOOK_FILE_EXT>')).forEach(function(nb) {
+    notebooks.filter(nb => nb.endsWith('<NOTEBOOK_FILE_EXT>')).forEach(function(nb, ndId) {
       it(`Running all cells in ${nb}`, async function () {
 
         const destnbPath = path.join(tempFolder, nb);
@@ -110,8 +109,6 @@ describe('Notebook Integration Testing', () => {
         await fsp.writeFile(srcmdPath, `---\n\n# [Notebook "${path.basename(srcnbPath)}":](#nb-${nbId})\n\n${md}\n\n`, "utf8");
 
         assert.equal(failed, false);
-
-        nbId++;
 
       });
     })
