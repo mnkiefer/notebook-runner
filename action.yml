@@ -66,8 +66,8 @@ runs:
       shell: bash
       run: |
         cd vscode-notebook-runner/test
-        COMMENT="$(cat comment.md)"
-        cat comment.md
+        LINK="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        COMMENT="$(cat comment.md | 's/REF_SUMMARY/$LINK/')"
         cat data/failed/*.md >> $GITHUB_STEP_SUMMARY
         echo "MULTI_LINE_COMMENT<<EOF" >> $GITHUB_ENV
         echo $COMMENT >> $GITHUB_ENV
