@@ -66,9 +66,10 @@ runs:
       shell: bash
       run: |
         cd vscode-notebook-runner/test
+        COMMENT="$(cat comment.md)"
         cat data/failed/*.md >> $GITHUB_STEP_SUMMARY
         echo "MULTI_LINE_COMMENT<<EOF" >> $GITHUB_ENV
-        cat comment.md >> $GITHUB_ENV
+        echo $COMMENT >> $GITHUB_ENV
         echo "EOF" >> $GITHUB_ENV
 
     - name: Append successful Notebook to summary
