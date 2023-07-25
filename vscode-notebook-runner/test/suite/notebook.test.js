@@ -78,18 +78,18 @@ describe('Notebook Integration Testing', () => {
                     const icon = success ? '✓' : '⨯';
                     if (code) {
                         const codeString = `<pre lang="${codeType}">▶️  <code><b>${code}</b></code></pre>`;
+                        md += `${codeString}\n`;
                         if (!success) {
                             comment += `- In Notebook "*${nb}*":<br><br>  ${codeString}<br><br>`;
                         }
-                        md += `${codeString}\n`;
                     }
                     if (output) {
                         const outputString = `<pre>${icon}  <code><i>${output}</i></code></pre>`;
+                        md += `${outputString}\n`;
                         if (!success) {
                             comment += `  ${outputString}<br><br>`;
                             break
                         }
-                        md += `${outputString}\n`;
                     }
                 default:
                     const text = notebook.cellAt(i).document.getText().replace(REGEX_STYLES, '');
@@ -109,7 +109,6 @@ describe('Notebook Integration Testing', () => {
         // Prepare Markdown summaries from Notebooks
         const srcmdPath = path.join(__dirname, dataDir, nb.replace('.' + '<NOTEBOOK_FILE_EXT>', '.md'));
         console.log('>> Writing:', srcmdPath)
-        console.log(md)
         await fsp.writeFile(srcmdPath, `---\n\n# Notebook "${path.basename(srcnbPath)}":\n\n${md}\n\n`, "utf8");
 
         assert.equal(failed, false);
