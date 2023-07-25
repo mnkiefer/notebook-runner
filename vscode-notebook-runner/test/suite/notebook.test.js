@@ -85,7 +85,7 @@ describe('Notebook Integration Testing', () => {
                         }
                     }
                     if (output) {
-                        const outputString = `<pre>${icon}  <code><i>${output}</i></code></pre>\n`;
+                        const outputString = `  <pre>${icon}  <code><i>${output}</i></code></pre>\n`;
                         if (success) {
                             md += outputString;
                         } else {
