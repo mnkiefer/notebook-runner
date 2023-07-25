@@ -58,7 +58,7 @@ describe('Notebook Integration Testing', () => {
             }
         }
         let md = '';
-        let comment = '### :boom: Broken Notebooks found!\n\n\n';
+        let comment = '### :boom: Broken Notebooks found!<br><br>';
 
         let failed = false;
         let dataDir = '../data';
@@ -79,14 +79,14 @@ describe('Notebook Integration Testing', () => {
                     if (code) {
                         const codeString = `<pre lang="${codeType}">▶️  <code><b>${code}</b></code></pre>`;
                         if (!success) {
-                            comment += `- In Notebook "*${nb}*":\n\n  ${codeString}\n\n\n`;
+                            comment += `- In Notebook "*${nb}*":<br><br>  ${codeString}<br><br>`;
                         }
                         md += `${outputString}\n`;
                     }
                     if (output) {
                         const outputString = `<pre>${icon}  <code><i>${output}</i></code></pre>`;
                         if (!success) {
-                            comment += `  ${outputString}`;
+                            comment += `  ${outputString}<br><br>`;
                         }
                         md += `${outputString}\n`;
                     }
@@ -108,6 +108,7 @@ describe('Notebook Integration Testing', () => {
 
         // Prepare Markdown summaries from Notebooks
         console.log('>> Writing:', srcmdPath)
+        console.log(md)
         const srcmdPath = path.join(__dirname, dataDir, nb.replace('.' + '<NOTEBOOK_FILE_EXT>', '.md'));
         await fsp.writeFile(srcmdPath, `---\n\n# Notebook "${path.basename(srcnbPath)}":\n\n${md}\n\n`, "utf8");
 
