@@ -49,7 +49,6 @@ describe('Notebook Integration Testing', () => {
         const notebook = await vscode.workspace.openNotebookDocument(nbUri);
         await vscode.window.showNotebookDocument(notebook);
 
-        console.log('>> Running', nb)
         await vscode.commands.executeCommand('notebook.execute');
 
         const getOutput = (index) => {
@@ -58,8 +57,7 @@ describe('Notebook Integration Testing', () => {
             }
         }
         let md = '';
-        let comment = '### :boom: Broken Notebooks found!<br><br>';
-
+        let comment = '### :boom: Broken Notebooks found!\n\n';
         let failed = false;
         let dataDir = '../data';
         for (let i=0; i<notebook.cellCount; i++) {
@@ -80,14 +78,14 @@ describe('Notebook Integration Testing', () => {
                         const codeString = `<pre lang="${codeType}">▶️  <code><b>${code}</b></code></pre>`;
                         md += `${codeString}\n`;
                         if (!success) {
-                            comment += `- In Notebook <a href="'<REF_SUMMARY>'#nb-${nbId})">${nb}</a>:<br><br>  ${codeString}<br><br>`;
+                            comment += `- In Notebook <a href="'<REF_SUMMARY>'#nb-${nbId}">${nb}</a>:\n\n  ${codeString}\n\n`;
                         }
                     }
                     if (output) {
                         const outputString = `<pre>${icon}  <code><i>${output}</i></code></pre>`;
                         md += `${outputString}\n`;
                         if (!success) {
-                            comment += `  ${outputString}<br><br>`;
+                            comment += `  ${outputString}\n\n\n`;
                             break;
                         }
                     }
@@ -109,7 +107,6 @@ describe('Notebook Integration Testing', () => {
 
         // Prepare Markdown summaries from Notebooks
         const srcmdPath = path.join(__dirname, dataDir, nb.replace('.' + '<NOTEBOOK_FILE_EXT>', '.md'));
-        console.log('>> Writing:', srcmdPath)
         await fsp.writeFile(srcmdPath, `---\n\n# [Notebook "${path.basename(srcnbPath)}":](#nb-${nbId})\n\n${md}\n\n`, "utf8");
 
         assert.equal(failed, false);
