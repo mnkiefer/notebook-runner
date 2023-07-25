@@ -24,9 +24,4 @@ jobs:
     - name: Test broken 'Hello world' CAP Notebook
       uses: mnkiefer/notebook-runner@main
       with:
-        notebook-files: 'test/helloWorld.failed.capnb'
-
-    - name: Clean up
-      if: success() || failure()
-      run: |
-        echo "Done"
+        notebook-files: 'test/helloWorldWithError.capnb'

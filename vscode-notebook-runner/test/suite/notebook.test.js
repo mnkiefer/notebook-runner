@@ -58,7 +58,7 @@ describe('Notebook Integration Testing', () => {
             }
         }
         let md = '';
-        let comment = '';
+        let comment = '### :boom: Broken Notebooks found!\n';
 
         let failed = false;
         let dataDir = '../data';
@@ -77,19 +77,20 @@ describe('Notebook Integration Testing', () => {
                     output = output.replace(REGEX_STYLES, '').trim();
                     const icon = success ? '✓' : '⨯';
                     if (code) {
-                        const codeString = `<pre lang="${codeType}">▶️  <code><b>${code}</b></code></pre>\n`;
+                        const codeString = `<pre lang="${codeType}">▶️  <code><b>${code}</b></code></pre>`;
                         if (success) {
-                            md += codeString;
+                            md += `${codeString}\n`;
                         } else {
-                            comment += `### :boom: Broken Notebooks found!\n\n- In Notebook *${nb}*:\n\n  ${codeString}\n`;
+                            comment += `- In Notebook "*${nb}*":\n`
+                            comment += `  ${codeString}\n`;
                         }
                     }
                     if (output) {
-                        const outputString = `<pre>${icon}  <code><i>${output}</i></code></pre>\n`;
+                        const outputString = `<pre>${icon}  <code><i>${output}</i></code></pre>`;
                         if (success) {
-                            md += outputString;
+                            md += `${outputString}\n`;
                         } else {
-                            comment += `${outputString}\n`
+                            comment += `  ${outputString}`;
                         }
                     }
                     break;
@@ -111,6 +112,7 @@ describe('Notebook Integration Testing', () => {
         // Prepare Markdown summaries from Notebooks
         const srcmdPath = path.join(__dirname, dataDir, nb.replace('.' + '<NOTEBOOK_FILE_EXT>', '.md'));
         console.log('* Writing:', srcmdPath)
+        console.log('COMMENT:', comment)
         await fsp.writeFile(srcmdPath, `---\n\n# Notebook "${path.basename(srcnbPath)}":\n\n${md}\n\n`, "utf8");
 
         assert.equal(failed, false);
