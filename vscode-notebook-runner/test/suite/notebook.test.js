@@ -49,7 +49,6 @@ describe('Notebook Integration Testing', () => {
         const notebook = await vscode.workspace.openNotebookDocument(nbUri);
         await vscode.window.showNotebookDocument(notebook);
 
-        console.log('>> Running', nb)
         await vscode.commands.executeCommand('notebook.execute');
 
         const getOutput = (index) => {
@@ -59,7 +58,6 @@ describe('Notebook Integration Testing', () => {
         }
         let md = '';
         let comment = '### :boom: Broken Notebooks found!<br><br>';
-
         let failed = false;
         let dataDir = '../data';
         for (let i=0; i<notebook.cellCount; i++) {
@@ -109,7 +107,6 @@ describe('Notebook Integration Testing', () => {
 
         // Prepare Markdown summaries from Notebooks
         const srcmdPath = path.join(__dirname, dataDir, nb.replace('.' + '<NOTEBOOK_FILE_EXT>', '.md'));
-        console.log('>> Writing:', srcmdPath)
         await fsp.writeFile(srcmdPath, `---\n\n# [Notebook "${path.basename(srcnbPath)}":](#nb-${nbId})\n\n${md}\n\n`, "utf8");
 
         assert.equal(failed, false);
