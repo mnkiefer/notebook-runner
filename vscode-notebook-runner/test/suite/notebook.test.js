@@ -58,7 +58,7 @@ describe('Notebook Integration Testing', () => {
             }
         }
         let md = '';
-        let comment = '';
+        let comment = '### :boom: Broken Notebooks found!\n\n';
 
         let failed = false;
         let dataDir = '../data';
@@ -81,7 +81,7 @@ describe('Notebook Integration Testing', () => {
                         if (success) {
                             md += codeString;
                         } else {
-                            comment += `### :boom: Broken Notebooks found!\n\n- In Notebook *${nb}*:\n\n  ${codeString}\n`;
+                            comment += `- In Notebook *${nb}*:\n\n  ${codeString}`;
                         }
                     }
                     if (output) {
@@ -89,7 +89,7 @@ describe('Notebook Integration Testing', () => {
                         if (success) {
                             md += outputString;
                         } else {
-                            comment += `  ${outputString}\n`
+                            comment += `\n  ${outputString}`;
                         }
                     }
                     break;
