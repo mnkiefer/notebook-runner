@@ -40,7 +40,6 @@ describe('Notebook Integration Testing', () => {
 
     notebooks.filter(nb => nb.endsWith('<NOTEBOOK_FILE_EXT>')).forEach(function(nb) {
       it(`Running all cells in ${nb}`, async function () {
-        console.log()
 
         const destnbPath = path.join(tempFolder, nb);
         const srcnbPath = path.join(__dirname, '../data', nb);
@@ -50,6 +49,7 @@ describe('Notebook Integration Testing', () => {
         const notebook = await vscode.workspace.openNotebookDocument(nbUri);
         await vscode.window.showNotebookDocument(notebook);
 
+        console.log('>> Running', nb)
         await vscode.commands.executeCommand('notebook.execute');
 
         const getOutput = (index) => {
@@ -58,7 +58,7 @@ describe('Notebook Integration Testing', () => {
             }
         }
         let md = '';
-        let comment = '### :boom: Broken Notebooks found!\n';
+        let comment = '### :boom: Broken Notebooks found!<br><br>';
 
         let failed = false;
         let dataDir = '../data';
@@ -78,20 +78,17 @@ describe('Notebook Integration Testing', () => {
                     const icon = success ? '✓' : '⨯';
                     if (code) {
                         const codeString = `<pre lang="${codeType}">▶️  <code><b>${code}</b></code></pre>`;
-                        if (success) {
-                            md += `${codeString}\n`;
-                        } else {
-                            comment += `- In Notebook "*${nb}*":\n`
-                            comment += `  ${codeString}\n`;
+                        if (!success) {
+                            comment += `- In Notebook "*${nb}*":<br><br>  ${codeString}<br><br>`;
                         }
+                        md += `${outputString}\n`;
                     }
                     if (output) {
                         const outputString = `<pre>${icon}  <code><i>${output}</i></code></pre>`;
-                        if (success) {
-                            md += `${outputString}\n`;
-                        } else {
-                            comment += `  ${outputString}`;
+                        if (!success) {
+                            comment += `  ${outputString}<br><br>`;
                         }
+                        md += `${outputString}\n`;
                     }
                     break;
                 default:
@@ -110,9 +107,9 @@ describe('Notebook Integration Testing', () => {
         }
 
         // Prepare Markdown summaries from Notebooks
+        console.log('>> Writing:', srcmdPath)
+        console.log(md)
         const srcmdPath = path.join(__dirname, dataDir, nb.replace('.' + '<NOTEBOOK_FILE_EXT>', '.md'));
-        console.log('* Writing:', srcmdPath)
-        console.log('COMMENT:', comment)
         await fsp.writeFile(srcmdPath, `---\n\n# Notebook "${path.basename(srcnbPath)}":\n\n${md}\n\n`, "utf8");
 
         assert.equal(failed, false);
