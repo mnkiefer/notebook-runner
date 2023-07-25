@@ -67,8 +67,9 @@ runs:
       run: |
         cd vscode-notebook-runner/test
         cat data/failed/*.md >> $GITHUB_STEP_SUMMARY
-        comment="$(cat comment.md)"
-        echo "comment=$comment" >> $GITHUB_ENV
+        echo "MULTI_LINE_COMMENT<<EOF" >> $GITHUB_ENV
+        cat comment.md >> $GITHUB_ENV
+        echo "EOF" >> $GITHUB_ENV
 
     - name: Append successful Notebook to summary
       if: ${{ inputs.summary-on-success == 'true' }}
@@ -80,4 +81,4 @@ runs:
       if: failure()
       uses: mshick/add-pr-comment@v2
       with:
-        message: "${{ env.comment }}"
+        message: ${{ env.MULTI_LINE_COMMENT }}  
