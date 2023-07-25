@@ -81,16 +81,16 @@ describe('Notebook Integration Testing', () => {
                         if (!success) {
                             comment += `- In Notebook "*${nb}*":<br><br>  ${codeString}<br><br>`;
                         }
-                        md += `${outputString}\n`;
+                        md += `${codeString}\n`;
                     }
                     if (output) {
                         const outputString = `<pre>${icon}  <code><i>${output}</i></code></pre>`;
                         if (!success) {
                             comment += `  ${outputString}<br><br>`;
+                            break
                         }
                         md += `${outputString}\n`;
                     }
-                    break;
                 default:
                     const text = notebook.cellAt(i).document.getText().replace(REGEX_STYLES, '');
                     md += text;
