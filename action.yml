@@ -33,7 +33,7 @@ runs:
 
     - name: Get Summary URL for current job
       id: summary
-      uses: ppl-strflt/job-summary-url-action@v1
+      uses: pl-strflt/job-summary-url-action@v1
 
     - name: Setup VSCode Tests
       shell: bash
