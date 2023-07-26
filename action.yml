@@ -31,6 +31,11 @@ runs:
       with:
         node-version: 16
 
+    - name: Get Summary URL for current job
+      uses: pl-strflt/export-job-urls@v1
+      shell: bash
+    - run: echo "URL=${{ steps.exp.outputs.job_summary_url }}" >> $GITHUB_ENV
+
     - name: Setup VSCode Tests
       shell: bash
       run: |
@@ -44,9 +49,7 @@ runs:
         sed -i "s/'<TIMEOUT>'/${{ inputs.timeout }}/g" test/suite/index.js
         sed -i "s/<NOTEBOOK_VSCODE_EXT>/${{ inputs.notebook-vscode-ext }}/g" test/runTest.js
         sed -i "s/<NOTEBOOK_FILE_EXT>/${{ inputs.notebook-file-ext }}/g" test/suite/notebook.test.js
-        sed -i "s@'<REF_SUMMARY>'@${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}@g" test/suite/notebook.test.js
-        echo "RUN_ID=${{ github.run_id }}"
-        echo "***BUILD_NUMBER=$GITHUB_RUN_NUMBER"
+        sed -i "s@'<SUMMARY_URL>'@${{ env.MULTI_LINE_COMMENT }}@g" test/suite/notebook.test.js
 
         npm i -g @sap/cds-dk  --quiet --no-progress
         npm i  --quiet --no-progress
