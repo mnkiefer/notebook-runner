@@ -36,11 +36,9 @@ describe('Notebook Integration Testing', () => {
         await vscode.workspace.fs.delete(vscode.Uri.file(tempFolder), { recursive: true });
     });
 
-    let nbId = 0;
     const notebooks = fs.readdirSync(path.join(__dirname, '../data'));
     notebooks.filter(nb => nb.endsWith('<NOTEBOOK_FILE_EXT>')).forEach(function(nb) {
       it(`Running all cells in ${nb}`, async function () {
-        nbId++;
 
         const destnbPath = path.join(tempFolder, nb);
         const srcnbPath = path.join(__dirname, '../data', nb);
