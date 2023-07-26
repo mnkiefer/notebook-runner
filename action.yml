@@ -34,7 +34,7 @@ runs:
     - name: Get Summary URL for current job
       uses: pl-strflt/export-job-urls@v1
       shell: bash
-    - run: echo "URL=${{ steps.exp.outputs.job_summary_url }}" >> $GITHUB_ENV
+      run: echo "URL=${{ steps.exp.outputs.job_summary_url }}" >> $GITHUB_ENV
 
     - name: Setup VSCode Tests
       shell: bash
