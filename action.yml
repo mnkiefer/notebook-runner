@@ -32,7 +32,7 @@ runs:
         node-version: 16
 
     - name: Get Summary URL for current job
-      id: summary
+      id: url
       uses: pl-strflt/job-summary-url-action@v1
 
     - name: Setup VSCode Tests
@@ -48,7 +48,7 @@ runs:
         sed -i "s/'<TIMEOUT>'/${{ inputs.timeout }}/g" test/suite/index.js
         sed -i "s/<NOTEBOOK_VSCODE_EXT>/${{ inputs.notebook-vscode-ext }}/g" test/runTest.js
         sed -i "s/<NOTEBOOK_FILE_EXT>/${{ inputs.notebook-file-ext }}/g" test/suite/notebook.test.js
-        sed -i "s@'<SUMMARY_URL>'@${{ steps.exp.outputs.job_summary_url }}@g" test/suite/notebook.test.js
+        sed -i "s@'<SUMMARY_URL>'@${{ steps.url.outputs.job_summary_url }}@g" test/suite/notebook.test.js
 
         npm i -g @sap/cds-dk  --quiet --no-progress
         npm i  --quiet --no-progress
