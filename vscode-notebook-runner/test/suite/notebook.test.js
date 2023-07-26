@@ -77,7 +77,7 @@ describe('Notebook Integration Testing', () => {
                         const codeString = `<pre lang="${codeType}">▶️  <code><b>${code}</b></code></pre>`;
                         md += `${codeString}\n`;
                         if (!success) {
-                            comment += `- Notebook <a href="'<SUMMARY_URL>'"><i>${nb}</i></a>:\n\n  ${codeString}\n\n`;
+                            comment += `- Notebook <a href="'<SUMMARY_URL>'"><i>${nb}</i></a>:\n\n  ${codeString}\n`;
                         }
                     }
                     if (output) {
