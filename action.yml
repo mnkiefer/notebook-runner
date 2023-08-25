@@ -53,7 +53,7 @@ runs:
         npm i -g @sap/cds-dk  --quiet --no-progress
         npm i  --quiet --no-progress
 
-        mkdir test/data
+        mkdir -p test/data
         cd ..
         for file in ${{ inputs.notebook-files }}; do
           echo "FILE=$file"
