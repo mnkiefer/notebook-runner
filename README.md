@@ -29,5 +29,5 @@ test:
   - name: Test CAP Notebooks
     uses: mnkiefer/notebook-tests@main
       with:
-        notebook-files: "./notebooks/hello-world.capnb ./notebooks/jumpstart.capnb"
+        notebook-files: "./test/helloWorld.capnb ./test/helloWorldWithError.capnb ./test/helloWorldWithError2.capnb"
 ```
