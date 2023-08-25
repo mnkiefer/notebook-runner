@@ -49,6 +49,7 @@ describe('Notebook Integration Testing', () => {
         await vscode.window.showNotebookDocument(notebook);
 
         await vscode.commands.executeCommand('notebook.execute');
+        await vscode.workspace.saveAll();
 
         const getOutput = (index) => {
             if (notebook.cellAt(index).outputs[0] && notebook.cellAt(index).outputs[0].items[0]) {
