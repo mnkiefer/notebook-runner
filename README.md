@@ -20,16 +20,14 @@ In addition, please install anything else that your notebook needs to run.
 
 ## Example usage
 
-Below is an example which uses the *CAP Notebook Runner* action is used once files are dumped into in the _./notebooks_ folder:
+Below is an example which runs and tests 2 CAP Notebooks:
 
 ```yaml
-container:
-  # docker image containing xvfb
-  image: sitespeedio/sitespeed.io
-
-steps:
-- name: Test CAP Notebooks
-  uses: cap/notebook-tests@main
-    with:
-      notebook-files: "./notebooks/hello-world.capnb ./notebooks/jumpstart.capnb"
+test:  
+  runs-on: ubuntu-latest
+  steps:
+  - name: Test CAP Notebooks
+    uses: mnkiefer/notebook-tests@main
+      with:
+        notebook-files: "./test/helloWorld.capnb ./test/helloWorldWithError.capnb ./test/helloWorldWithError2.capnb"
 ```
