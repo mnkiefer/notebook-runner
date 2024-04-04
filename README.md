@@ -17,7 +17,7 @@ It also uploads the executed Notebooks themselves (_notebooks.zip_) as artifacts
   </picture>
 
 In some cases, further inspection on what went wrong in a Notebook might be necessary. Here, it can be of great value to unpack the above artifacts and taking
-a close look at the Notebook by opening it in your local VS Code Editor:
+a close look at the Notebook by opening it in your local [VS Code](https://code.visualstudio.com/) Editor:
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./_assets/Notebook_dark.png">
