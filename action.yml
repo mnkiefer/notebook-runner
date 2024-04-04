@@ -1,5 +1,7 @@
-name: "Run all Notebooks"
-description: "Test Notebooks via *Run all* button"
+name: "Notebook Runner"
+description: "Runs and tests Notebooks with VS Code"
+icon: "book"
+color: "blue"
 
 inputs:
   notebook-files:
