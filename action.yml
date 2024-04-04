@@ -56,15 +56,15 @@ runs:
       if: failure()
       shell: bash
       run: |
-        tar -czf failedNotebooks.tgz -C vscode-notebook-runner/test/data/out/ .
+        tar -czf notebooks.tgz -C vscode-notebook-runner/test/data/out/ .
 
     - name: Upload failed notebooks for viewing
       id: artifact-upload-step
       if: failure()
       uses: actions/upload-artifact@v3
       with:
-        name: failedNotebooks
-        path: failedNotebooks.tgz
+        name: notebooks
+        path: notebooks.tgz
 
     - name: Create comment for failed notebooks
       if: failure()
