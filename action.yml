@@ -1,0 +1,86 @@
+name: "Run all Notebooks"
+description: "Test Notebooks via *Run all* button"
+
+inputs:
+  notebook-files:
+    description: "Notebooks to be tested, separated by spaces"
+    required: true
+  notebook-file-ext:
+    description: "Notebook file extension"
+    required: false
+    default: 'capnb'
+  notebook-vscode-ext:
+    description: "Notebook VS Code extension"
+    required: false
+    default: 'SAPSE.vscode-cds'
+  timeout:
+    description: "Mocha timeout for VS Code tests"
+    require: false
+    default: 120000
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Setup VS Code Tests
+      shell: bash
+      run: |
+        echo "TIMEOUT=${{ inputs.timeout }}" >> $GITHUB_ENV
+        echo "NOTEBOOK_VSCODE_EXT=${{ inputs.notebook-vscode-ext }}" >> $GITHUB_ENV
+        echo "NOTEBOOK_FILE_EXT=${{ inputs.notebook-file-ext }}" >> $GITHUB_ENV
+
+        # Without self-hosted container, use ${{ github.action_path }} instead
+        cp -r ${GITHUB_ACTION_PATH}/vscode-notebook-runner .
+
+        cd vscode-notebook-runner
+        npm i -g @sap/cds-dk  --quiet --no-progress
+        npm i  --quiet --no-progress
+
+        mkdir -p test/data
+        for file in ${{ inputs.notebook-files }}; do
+          cp ../$file test/data
+        done
+
+    - name: Run all Notebooks
+      shell: bash
+      run: |
+        cd vscode-notebook-runner
+        npm i
+        xvfb-run --auto-servernum npm run vscode
+        
+    - name: Create artifact for failed notebooks
+      if: failure()
+      shell: bash
+      run: |
+        tar -czf failedNotebooks.tgz -C vscode-notebook-runner/test/data/out/ .
+
+    - name: Upload failed notebooks for viewing
+      id: artifact-upload-step
+      if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: failedNotebooks
+        path: failedNotebooks.tgz
+
+    - name: Create comment for failed notebooks
+      if: failure()
+      shell: bash
+      run: |
+        cd vscode-notebook-runner/test/data/out
+        echo "MULTI_LINE_COMMENT<<EOF" >> $GITHUB_ENV
+        echo "$(cat comment.md)" >> $GITHUB_ENV
+        
+        # Note: Can add artifact url once actions/upload-artifact@v4 supports GHES
+        # echo "${{ steps.artifact-upload-step.outputs.artifact-url }}" >> $GITHUB_ENV
+        
+        echo "EOF" >> $GITHUB_ENV
+
+    - name: Commment on failed notebooks in PR
+      if: failure()
+      uses: mshick/add-pr-comment@v2
+      with:
+        message: ${{ env.MULTI_LINE_COMMENT }}

@@ -1,0 +1,26 @@
+name: Test action
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test_success:
+    runs-on: [ ubuntu-latest ]
+    steps:
+    - uses: actions/checkout@v3
+  
+    - name: Test 'Hello world' CAP Notebook
+      uses: mnkiefer/notebook-runner@main
+      with:
+        notebook-files: 'test/helloWorld.capnb'
+        summary-on-success: true
+
+  test_failure:
+    runs-on: [ ubuntu-latest ]
+    steps:
+    - uses: actions/checkout@v3
+  
+    - name: Test broken 'Hello world' CAP Notebook
+      uses: mnkiefer/notebook-runner@main
+      with:
+        notebook-files: 'test/helloWorld.capnb test/jumpstart.capnb'
