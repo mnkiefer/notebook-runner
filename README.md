@@ -29,7 +29,7 @@ The only required *inputs* are a string of `notebook-files` to test.
 
 ## Example usage
 
-Below is an example for using this action to tests 2 [CAP Notebooks](https://cap.cloud.sap/docs/tools/#cap-vscode-notebook):
+Below is an example which shows how to use this action to test 2 sample [CAP Notebooks](https://cap.cloud.sap/docs/tools/#cap-vscode-notebook), which you can also find in this repository under the `test` directory:
 
 ```yaml
 container:
