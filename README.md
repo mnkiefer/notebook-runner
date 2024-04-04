@@ -2,7 +2,8 @@
 
 This action automatically runs your Notebooks in [VS Code](https://code.visualstudio.com/) to check for errors, so that you don't have to.
 
-It will notify you in case of any errors (i.e. Notebooks with a failed code cell) by either opening an issue or commenting on a PR with the error details. It also uploads the failed Notebooks themselves as artifacts to the Action summary in case further inspection of the error is necessary.
+If you register this action on a pull request, it will notify you in case of any errors (i.e. Notebooks with a failed code cell) with the error details.
+It also uploads the executed Notebooks themselves as artifacts to the Action summary in case further inspection of the error is necessary.
 
 ## Requirements
 
