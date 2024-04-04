@@ -4,12 +4,25 @@ This action automatically runs your Notebooks in [VS Code](https://code.visualst
 
 If you register this action on a pull request, it will notify you in case of any errors (i.e. Notebooks with a failed code cell) with the error details:
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./_assets/PR_comment_dark.png">
-  <img alt="PR comment on failed Notebook" src="./_assets/PR_comment_light.png">
-</picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./_assets/PR_comment_dark.png">
+    <img alt="PR comment on failed Notebook" src="./_assets/PR_comment_light.png">
+  </picture>
 
-It also uploads the executed Notebooks themselves as artifacts to the Action summary in case further inspection of the error is necessary.
+It also uploads the executed Notebooks themselves (_notebooks.zip_) as artifacts to the Actions summary:
+
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./_assets/Artifacts_dark.png">
+    <img alt="Uploaded notebooks.zip Artifacts" src="./_assets/Artifacts_light.png">
+  </picture>
+
+In some cases, further inspection on what went wrong in a Notebook might be necessary. Here, it can be of great value to unpack the above artifacts and taking
+a close look at the Notebook by opening it in your local VS Code Editor:
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./_assets/Notebook_dark.png">
+  <img alt="Openend Notebook 'jumpstart.capnb'" src="./_assets/Notebook_light.png">
+</picture>
 
 ## Requirements
 
