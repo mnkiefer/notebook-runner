@@ -1,7 +1,8 @@
 name: "Notebook Runner"
 description: "Runs and tests Notebooks with VS Code"
-icon: "book"
-color: "blue"
+branding:
+  icon: "book"
+  color: "blue"
 
 inputs:
   notebook-files:
