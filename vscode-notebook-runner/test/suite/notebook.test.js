@@ -36,7 +36,8 @@ describe('Notebook Integration Testing', () => {
             let comment = '';
             const icon = ':boom:'
             const getDetails = ({ nb, cell, output }) => {
-                return `- **${nb}** at cell ${cell}:\n   <pre><code>${output}</code></pre>\n`
+                output = output.replace(/\n{2,}/g, '\n');
+                return `- **${nb}** at cell ${cell}:\n<pre><code>${output}</code></pre>\n`;
             };
                 
             if (failCount === 1) {
