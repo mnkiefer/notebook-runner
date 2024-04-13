@@ -25,3 +25,14 @@ jobs:
       uses: mnkiefer/notebook-runner@main
       with:
         notebook-files: 'test/helloWorld.capnb test/jumpstart.capnb'
+
+  test_summary:
+    runs-on: [ ubuntu-latest ]
+    needs: [ test_success, test_failure ]
+    if: always() && ${{ (needs.test_success.result != 'success' || needs.test_failure.result != 'failure') }}
+    
+    steps:
+    - uses: mshick/add-pr-comment@v2
+      with:
+        message: |
+          :boom: Oops, something went wrong! Check your test summary for details...
