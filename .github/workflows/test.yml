@@ -30,7 +30,8 @@ jobs:
   test_summary:
     runs-on: [ ubuntu-latest ]
     needs: [ test_success, test_failure ]
-    if: ${{ needs.test_success.result != 'success' && needs.test_failure.result != 'failure' }}
+    if: always()
+    #if: ${{ needs.test_success.result != 'success' && needs.test_failure.result != 'failure' }}
     
     steps:
     - uses: mshick/add-pr-comment@v2
