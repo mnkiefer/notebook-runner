@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Added
 
-- Added `artifacts-on-success` input to also upload artifacts on job success.
+- New input option `artifacts-on-success` to also upload artifacts on job success.
 
 ### Fixed
 
