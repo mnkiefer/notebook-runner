@@ -20,6 +20,10 @@ inputs:
     description: "Mocha timeout for VS Code tests"
     require: false
     default: 120000
+  artifacts-on-success:
+    description: "Whether to create artifacts on success"
+    required: false
+    default: false
 
 runs:
   using: "composite"
@@ -55,15 +59,15 @@ runs:
         npm i
         xvfb-run --auto-servernum npm run vscode
         
-    - name: Create artifact for failed notebooks
-      if: failure()
+    - name: Create artifacts
+      if: failure() || ${{ inputs.artifacts-on-success }}
       shell: bash
       run: |
         tar -czf notebooks.tgz -C vscode-notebook-runner/test/data/out/ .
 
-    - name: Upload failed notebooks for viewing
+    - name: Upload artifacts
       id: artifact-upload-step
-      if: failure()
+      if: failure() || ${{ inputs.artifacts-on-success }}
       uses: actions/upload-artifact@v3
       with:
         name: notebooks

@@ -15,7 +15,7 @@
 			"request": "launch",
 			"env": {
 				"NOTEBOOK_FILE_EXT": "capnb",
-				"TIMEOUT": "20000"
+				"TIMEOUT": "100000"
 			},
 			"args": [
 				"--extensionDevelopmentPath=${workspaceFolder}",
