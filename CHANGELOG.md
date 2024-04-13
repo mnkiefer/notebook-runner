@@ -7,11 +7,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 
-## [1.0.1] - TBD
+## [1.1.0] - TBD
+
+### Added
+
+- Added `artifacts-on-success` input to also upload artifacts on job success.
 
 ### Fixed
 
-- Removed multiple newlines from code for markdown comment
+- Removed multiple newlines from code for markdown comment.
 
 
 ## [1.0.0] - 2024-04-04
