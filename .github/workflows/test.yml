@@ -14,7 +14,7 @@ jobs:
       uses: mnkiefer/notebook-runner@main
       with:
         notebook-files: 'test/helloWorld.capnb'
-        summary-on-success: true
+        artifacts-on-success: true
 
   test_failure:
     runs-on: [ ubuntu-latest ]
