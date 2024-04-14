@@ -10,10 +10,18 @@ jobs:
     steps:
     - uses: actions/checkout@v4
   
-    - name: Test Notebooks
+    - name: Test Jupyter Notebooks
       uses: mnkiefer/notebook-runner@main
       with:
-        notebook-files: ${{ '_notebooks/*' }}
+        notebook-files: ${{ '_notebooks/*.ipynb' }}
+        artifacts-on-success: true
+
+    - name: Test CAP Notebooks
+      uses: mnkiefer/notebook-runner@main
+      with:
+        notebook-files: ${{ '_notebooks/*.capnb' }}
+        notebook-file-ext: 'capnb'
+        notebook-vscode-ext: 'SAPSE.vscode-cds'
         artifacts-on-success: true
 
   # test_failure:

@@ -11,11 +11,11 @@ inputs:
   notebook-file-ext:
     description: "Notebook file extension"
     required: false
-    default: 'capnb'
+    default: 'ipynb'
   notebook-vscode--ext:
     description: "Notebook VS Code extension"
     required: false
-    default: 'SAPSE.vscode-cds'
+    default: 'ms-toolsai.jupyter'
   vscode-version:
     description: "VS Code version"
     required: false
