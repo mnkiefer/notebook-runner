@@ -17,7 +17,8 @@ jobs:
       shell: bash
       run: |
         python --version
-        python3 --version
+        pip install notebook
+        jupyter kernelspec list
 
     #- name: Test Jupyter Notebooks
     #  uses: mnkiefer/notebook-runner@main
