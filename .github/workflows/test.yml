@@ -8,7 +8,7 @@ jobs:
   test_success:
     runs-on: [ ubuntu-latest ]
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
   
     - name: Test 'Hello world' CAP Notebook
       uses: mnkiefer/notebook-runner@main
@@ -20,7 +20,7 @@ jobs:
     runs-on: [ ubuntu-latest ]
     continue-on-error: true
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
   
     - name: Test broken 'Hello world' CAP Notebook
       uses: mnkiefer/notebook-runner@main
