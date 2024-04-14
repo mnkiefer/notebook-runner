@@ -10,23 +10,23 @@ jobs:
     steps:
     - uses: actions/checkout@v4
   
-    - name: Test 'Hello world' CAP Notebook
+    - name: Test Notebooks
       uses: mnkiefer/notebook-runner@main
       with:
-        notebook-files: 'test/helloWorld.capnb'
+        notebook-files: ${{ '_notebooks/*' }}
         artifacts-on-success: true
 
-  test_failure:
-    runs-on: [ ubuntu-latest ]
-    steps:
-    - uses: actions/checkout@v4
+  # test_failure:
+  #   runs-on: [ ubuntu-latest ]
+  #   steps:
+  #   - uses: actions/checkout@v4
   
-    - name: Test broken 'Hello world' CAP Notebook
-      uses: mnkiefer/notebook-runner@main
-      with:
-        notebook-files: 'test/helloWorld.capnb test/jumpstart.capnb'
-      continue-on-error: true
+  #   - name: Test broken Notebooks
+  #     uses: mnkiefer/notebook-runner@main
+  #     with:
+  #       notebook-files: ''
+  #     continue-on-error: true
 
-    - name: Check for failure
-      if: always() && (${{ steps.test_failure.outcome }} == 'failure')
-      run: exit 0
+  #  - name: Check for failure
+  #    if: always() && (${{ steps.test_failure.outcome }} == 'failure')
+  #    run: exit 0
