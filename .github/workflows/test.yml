@@ -26,6 +26,7 @@ jobs:
         notebook-files: ${{ '_notebooks/*.ipynb' }}
         notebook-file-ext: 'ipynb'
         notebook-vscode-ext: 'ms-toolsai.jupyter'
+        timeout: 200000
         artifacts-on-success: true
 
     #- name: Checkout Java
