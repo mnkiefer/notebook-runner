@@ -17,7 +17,7 @@ jobs:
       uses: mnkiefer/notebook-runner@main
       with:
         notebook-files: ${{ '_notebooks/*.ipynb' }}
-         artifacts-on-success: true
+        artifacts-on-success: true
 
     #- name: Checkout Java
     #  uses: actions/setup-java@v4
