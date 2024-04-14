@@ -40,6 +40,7 @@ The only required *inputs* are a string of `notebook-files` to test.
 | `notebook-vscode-ext` | VS Code Notebook extension to install | | `SAPSE.vscode-cds` |
 | `timeout` | Mocha timeout for VS Code tests | | `120000` |
 | `artifacts-on-success` | Upload artifacts on success | | `false` |
+| `artifacts-kind` | Copy folder to be uploaded as artifacts | | `file` | 
 
 ## Example usage
 
