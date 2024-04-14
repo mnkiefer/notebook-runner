@@ -69,10 +69,6 @@ describe('Notebook Integration Testing', () => {
 
         await vscode.window.showNotebookDocument(notebook);
         await vscode.commands.executeCommand('notebook.execute');
-        if (inputs.NOTEBOOK_FILE_EXT === 'ipynb') {
-            await vscode.commands.executeCommand('notebook.selectKernel');
-        }
-        await notebook.save();
         await vscode.workspace.saveAll();
 
         await fsp.mkdir(path.join(__dirname, outDir), { recursive: true }).catch((err) => console.log(err));
