@@ -16,7 +16,8 @@ jobs:
     - name: Python Env
       shell: bash
       run: |
-        python -v
+        python --version
+        python3 --version
 
     #- name: Test Jupyter Notebooks
     #  uses: mnkiefer/notebook-runner@main
