@@ -12,7 +12,7 @@ inputs:
     description: "Notebook file extension"
     required: false
     default: 'ipynb'
-  notebook-vscode--ext:
+  notebook-vscode-ext:
     description: "Notebook VS Code extension"
     required: false
     default: 'ms-toolsai.jupyter'
