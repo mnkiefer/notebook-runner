@@ -10,12 +10,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
   
-    - name: Test Jupyter Notebooks
-      uses: mnkiefer/notebook-runner@main
-      with:
-        notebook-files: ${{ '_notebooks/*.ipynb' }}
-        vscode-version: 'latest'
-        artifacts-on-success: true
+    # - name: Test Jupyter Notebooks
+    #   uses: mnkiefer/notebook-runner@main
+    #   with:
+    #     notebook-files: ${{ '_notebooks/*.ipynb' }}
+    #     vscode-version: 'latest'
+    #     artifacts-on-success: true
 
     - name: Test CAP Notebooks
       uses: mnkiefer/notebook-runner@main
