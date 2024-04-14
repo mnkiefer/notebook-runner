@@ -7,39 +7,38 @@ on:
 jobs:
   test_success:
     runs-on: [ ubuntu-latest ]
-    container:
-      image: sitespeedio/sitespeed.io
+    #container:
+    #  image: sitespeedio/sitespeed.io
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Checkout Java
-      uses: actions/setup-java@v4
-      with:
-        distribution: zulu
-        java-version: 18
-  
-    - name: Set up Maven
-      uses: stCarolas/setup-maven@v4.5
-      with:
-        maven-version: 3.8.2
-  
-    - name: Test CAP Notebooks
+    - name: Test Jupyter Notebooks
       uses: mnkiefer/notebook-runner@main
       with:
-        notebook-files: ${{ '_notebooks/*.capnb' }}
-        notebook-file-ext: 'capnb'
-        notebook-vscode-ext: 'SAPSE.vscode-cds'
-        vscode-version: 'latest'
-        timeout: 300000
-        artifacts-on-success: true
+        notebook-files: ${{ '_notebooks/*.ipynb' }}
+         artifacts-on-success: true
 
-    # - name: Test Jupyter Notebooks
-    #   uses: mnkiefer/notebook-runner@main
-    #   with:
-    #     notebook-files: ${{ '_notebooks/*.ipynb' }}
-    #     vscode-version: 'latest'
-    #     artifacts-on-success: true
+    #- name: Checkout Java
+    #  uses: actions/setup-java@v4
+    #  with:
+    #    distribution: zulu
+    #    java-version: 18
+  
+    #- name: Set up Maven
+    #  uses: stCarolas/setup-maven@v4.5
+    #  with:
+    #    maven-version: 3.8.2
+  
+    #- name: Test CAP Notebooks
+    #  uses: mnkiefer/notebook-runner@main
+    #  with:
+    #    notebook-files: ${{ '_notebooks/*.capnb' }}
+    #    notebook-file-ext: 'capnb'
+    #    notebook-vscode-ext: 'SAPSE.vscode-cds'
+    #    vscode-version: 'latest'
+    #    timeout: 300000
+    #    artifacts-on-success: true
 
   # test_failure:
   #   runs-on: [ ubuntu-latest ]
