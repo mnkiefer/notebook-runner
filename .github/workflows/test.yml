@@ -17,7 +17,7 @@ jobs:
       shell: bash
       run: |
         python --version
-        pip install notebook matplotlib
+        pip install notebook py3Dmol
         jupyter kernelspec list
         ls _notebooks/*.ipynb
 
@@ -26,7 +26,7 @@ jobs:
       with:
         notebook-files: ${{ '_notebooks/*.ipynb' }}
         notebook-file-ext: 'ipynb'
-        notebook-vscode-ext: 'ms-toolsai.jupyter'
+        notebook-vscode-ext: 'ms-python.python ms-toolsai.jupyter'
         timeout: 200000
         artifacts-on-success: true
 
