@@ -19,6 +19,7 @@ jobs:
         python --version
         pip install notebook matplotlib
         jupyter kernelspec list
+        ls
 
     - name: Test Jupyter Notebooks
       uses: mnkiefer/notebook-runner@main
