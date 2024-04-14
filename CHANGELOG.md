@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 
 - New input option `artifacts-on-success` to also upload artifacts on job success.
+- New input option `artifacts-kind` to also be able to include the whole test folder in artifacts.
+- New input option `vscode-version` to set the VS Code version to be used for testing.
 
 ### Fixed
 
