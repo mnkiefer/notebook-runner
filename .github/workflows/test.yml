@@ -14,6 +14,7 @@ jobs:
       uses: mnkiefer/notebook-runner@main
       with:
         notebook-files: ${{ '_notebooks/*.ipynb' }}
+        vscode-version: 'latest'
         artifacts-on-success: true
 
     - name: Test CAP Notebooks
@@ -22,6 +23,7 @@ jobs:
         notebook-files: ${{ '_notebooks/*.capnb' }}
         notebook-file-ext: 'capnb'
         notebook-vscode-ext: 'SAPSE.vscode-cds'
+        vscode-version: 'latest'
         artifacts-on-success: true
 
   # test_failure:
