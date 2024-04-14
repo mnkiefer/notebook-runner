@@ -17,7 +17,8 @@ jobs:
       shell: bash
       run: |
         python --version
-        pip install notebook pandas
+        pip install notebook
+        pip install pandas altair
         jupyter kernelspec list
 
     - name: Test Jupyter Notebooks
