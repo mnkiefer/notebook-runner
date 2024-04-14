@@ -26,7 +26,6 @@ jobs:
       with:
         notebook-files: ${{ '_notebooks/*.ipynb' }}
         notebook-file-ext: 'ipynb'
-        notebook-vscode-ext: ''
         timeout: 200000
         artifacts-on-success: true
 
