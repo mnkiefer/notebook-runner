@@ -20,13 +20,13 @@ jobs:
         pip install notebook
         jupyter kernelspec list
 
-    #- name: Test Jupyter Notebooks
-    #  uses: mnkiefer/notebook-runner@main
-    #  with:
-    #    notebook-files: ${{ '_notebooks/*.ipynb' }}
-    #    notebook-file-ext: 'ipynb'
-    #    notebook-vscode-ext: 'ms-toolsai.jupyter'
-    #    artifacts-on-success: true
+    - name: Test Jupyter Notebooks
+      uses: mnkiefer/notebook-runner@main
+      with:
+        notebook-files: ${{ '_notebooks/*.ipynb' }}
+        notebook-file-ext: 'ipynb'
+        notebook-vscode-ext: 'ms-toolsai.jupyter'
+        artifacts-on-success: true
 
     #- name: Checkout Java
     #  uses: actions/setup-java@v4
