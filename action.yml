@@ -24,6 +24,10 @@ inputs:
     description: "Whether to create artifacts on success"
     required: false
     default: false
+  artifacts-kind:
+    description: "Kind of artifacts to be created"
+    required: false
+    default: 'file'
 
 runs:
   using: "composite"
@@ -39,6 +43,7 @@ runs:
         echo "TIMEOUT=${{ inputs.timeout }}" >> $GITHUB_ENV
         echo "NOTEBOOK_VSCODE_EXT=${{ inputs.notebook-vscode-ext }}" >> $GITHUB_ENV
         echo "NOTEBOOK_FILE_EXT=${{ inputs.notebook-file-ext }}" >> $GITHUB_ENV
+        echo "ARTIFACTS_KIND=${{ inputs.artifacts-kind }}" >> $GITHUB_ENV
 
         # Without self-hosted container, use ${{ github.action_path }} instead
         cp -r ${GITHUB_ACTION_PATH}/vscode-notebook-runner .

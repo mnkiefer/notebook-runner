@@ -10,7 +10,8 @@ const { describe, it } = require('mocha');
 const sleep = async (time) => new Promise(r => setTimeout(r, time));
 
 const inputs = {
-    NOTEBOOK_FILE_EXT: process.env.NOTEBOOK_FILE_EXT
+    NOTEBOOK_FILE_EXT: process.env.NOTEBOOK_FILE_EXT,
+    ARTIFACTS_KIND: process.env.ARTIFACTS_KIND
 }
 
 describe('Notebook Integration Testing', () => {
@@ -71,7 +72,13 @@ describe('Notebook Integration Testing', () => {
         await vscode.workspace.saveAll();
 
         await fsp.mkdir(path.join(__dirname, outDir), { recursive: true }).catch((err) => console.log(err));
-        await vscode.workspace.fs.copy(nbUri, vscode.Uri.file(path.join(__dirname, outDir, nb)), { overwrite: true });
+        if (inputs.ARTIFACTS_KIND === 'folder') {
+            const srcnbPathUri = vscode.Uri.file(tempFolder);
+            const destnbPathUri = vscode.Uri.file(path.join(__dirname, outDir, 'test_' + nb.replace(`.${inputs.NOTEBOOK_FILE_EXT}`, '')));
+            await vscode.workspace.fs.copy(srcnbPathUri, destnbPathUri, { overwrite: true });
+        } else if (inputs.ARTIFACTS_KIND === 'file') {
+            await vscode.workspace.fs.copy(nbUri, vscode.Uri.file(path.join(__dirname, outDir, nb)), { overwrite: true });
+        }
 
         for (let i=0; i<notebook.cellCount; i++) {
             const kind = notebook.cellAt(i).kind;
