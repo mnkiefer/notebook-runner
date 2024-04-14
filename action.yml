@@ -12,10 +12,14 @@ inputs:
     description: "Notebook file extension"
     required: false
     default: 'capnb'
-  notebook-vscode-ext:
+  notebook-vscode--ext:
     description: "Notebook VS Code extension"
     required: false
     default: 'SAPSE.vscode-cds'
+  vscode-version:
+    description: "VS Code version"
+    required: false
+    default: 'stable'
   timeout:
     description: "Mocha timeout for VS Code tests"
     require: false
