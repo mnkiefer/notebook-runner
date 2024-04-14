@@ -15,6 +15,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - New input option `artifacts-kind` to also be able to include the whole test folder in artifacts.
 - New input option `vscode-version` to set the VS Code version to be used for testing.
 
+### Changed
+
+- Allow more than one VS Code extension to be installed for option `vscode-notebook-ext`.
+
 ### Fixed
 
 - Removed multiple newlines from code for markdown comment.
