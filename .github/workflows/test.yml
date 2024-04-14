@@ -17,7 +17,7 @@ jobs:
       shell: bash
       run: |
         python --version
-        pip install notebook
+        pip install notebook pandas
         jupyter kernelspec list
 
     - name: Test Jupyter Notebooks
