@@ -17,7 +17,7 @@ jobs:
       shell: bash
       run: |
         python --version
-        pip install notebook matplotlib
+        pip install notebook py3Dmol
         jupyter kernelspec list
         ls _notebooks/*.ipynb
 
