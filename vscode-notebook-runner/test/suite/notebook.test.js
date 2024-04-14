@@ -69,6 +69,10 @@ describe('Notebook Integration Testing', () => {
 
         await vscode.window.showNotebookDocument(notebook);
         await vscode.commands.executeCommand('notebook.execute');
+        if (inputs.NOTEBOOK_FILE_EXT === 'ipynb') {
+            await vscode.commands.executeCommand('notebook.selectKernel');
+        }
+        await notebook.save();
         await vscode.workspace.saveAll();
 
         await fsp.mkdir(path.join(__dirname, outDir), { recursive: true }).catch((err) => console.log(err));
@@ -80,13 +84,18 @@ describe('Notebook Integration Testing', () => {
             await vscode.workspace.fs.copy(nbUri, vscode.Uri.file(path.join(__dirname, outDir, nb)), { overwrite: true });
         }
 
+        let codeCellCount = 0;
         for (let i=0; i<notebook.cellCount; i++) {
             const kind = notebook.cellAt(i).kind;
-            const success = kind === 2 ? notebook.cellAt(i).executionSummary.success : true;
-            if (!success) {
-                failedNotebooks.push({ nb, cell: i, output: getOutput(i) });
-                failCount++;
-                break;
+            if (kind === 2) {
+                codeCellCount++;
+                const success = inputs.NOTEBOOK_FILE_EXT === 'ipynb' ? notebook.cellAt(i).outputs[0].output_type != "error" :
+                    notebook.cellAt(i).executionSummary.success;
+                if (!success) {
+                    failedNotebooks.push({ nb, cell: codeCellCount, output: getOutput(i) });
+                    failCount++;
+                    break;
+                }
             }
         }
 

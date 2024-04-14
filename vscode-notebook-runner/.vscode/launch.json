@@ -14,9 +14,9 @@
 			"type": "extensionHost",
 			"request": "launch",
 			"env": {
-				"NOTEBOOK_FILE_EXT": "capnb",
-				"TIMEOUT": "100000",
-				"ARTIFACTS_KIND": "folder"
+				"NOTEBOOK_FILE_EXT": "ipynb",
+				"TIMEOUT": "200000",
+				"ARTIFACTS_KIND": "file"
 			},
 			"args": [
 				"--extensionDevelopmentPath=${workspaceFolder}",

@@ -30,9 +30,7 @@ async function main() {
       vscodeExecutablePath, 
       extensionDevelopmentPath, extensionTestsPath });
   } catch (err) {
-    console.error('Failed to run tests:');
-	console.log(err);
-    process.exit(1);
+    throw (err);
   }
 }
 
