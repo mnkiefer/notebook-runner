@@ -17,6 +17,19 @@ jobs:
     #     vscode-version: 'latest'
     #     artifacts-on-success: true
 
+
+  test_cap_notebooks:
+    - name: Checkout Java
+    uses: actions/setup-java@v4
+    with:
+      distribution: zulu
+      java-version: 17
+  
+    - name: Set up Maven
+      uses: stCarolas/setup-maven@v4.5
+      with:
+        maven-version: 3.8.2
+
     - name: Test CAP Notebooks
       uses: mnkiefer/notebook-runner@main
       with:
