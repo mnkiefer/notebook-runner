@@ -36,8 +36,8 @@ The only required *inputs* are a string of `notebook-files` to test.
 | Name | Description | Required | Default |
 | --- | --- | :---: | ---- |
 | `notebook-files` | Notebooks to be tested, separated by spaces | ✓ ||
-| `notebook-file-ext` | Notebook file extension | | `capnb` |
-| `notebook-vscode-ext` | VS Code Notebook extension to install | | `SAPSE.vscode-cds` |
+| `notebook-file-ext` | Notebook file extension | | `ipynb` |
+| `notebook-vscode-ext` | VS Code Notebook extension to install | | `ms-toolsai.jupyter` |
 | `vscode-version` | VS Code version to use | | `stable` |
 | `timeout` | Mocha timeout for VS Code tests | | `120000` |
 | `artifacts-on-success` | Upload artifacts on success | | `false` |

@@ -51,11 +51,8 @@ runs:
 
         # Without self-hosted container, use ${{ github.action_path }} instead
         cp -r ${GITHUB_ACTION_PATH}/vscode-notebook-runner .
-
+        
         cd vscode-notebook-runner
-        npm i -g @sap/cds-dk  --quiet --no-progress
-        npm i  --quiet --no-progress
-
         mkdir -p test/data
         for file in ${{ inputs.notebook-files }}; do
           cp ../$file test/data
