@@ -17,7 +17,7 @@ jobs:
       shell: bash
       run: |
         python --version
-        pip install notebook py3Dmol
+        pip install notebook pylance py3Dmol
         jupyter kernelspec list
         ls _notebooks/*.ipynb
 
@@ -26,6 +26,7 @@ jobs:
       with:
         notebook-files: ${{ '_notebooks/*.ipynb' }}
         notebook-file-ext: 'ipynb'
+        notebook-vscode-ext: 'ms-python.python'
         artifacts-on-success: true
 
     #- name: Checkout Java
