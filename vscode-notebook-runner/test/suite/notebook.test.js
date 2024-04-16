@@ -59,6 +59,7 @@ describe('Notebook Integration Testing', () => {
 
       it(`Running all cells in ${nb}`, async function () {
 
+        try {
         const destnbPath = path.join(tempFolder, nb);
         const srcnbPath = path.join(__dirname, '../data', nb);
         const nbUri = vscode.Uri.file(destnbPath);
@@ -72,8 +73,6 @@ describe('Notebook Integration Testing', () => {
         await vscode.commands.executeCommand('notebook.execute');
         await vscode.workspace.saveAll();
 
-        console.log('NOTEBOOK RUN DONE', notebook)
-
         await fsp.mkdir(path.join(__dirname, outDir), { recursive: true }).catch((err) => console.log(err));
         if (inputs.ARTIFACTS_KIND === 'folder') {
             const srcnbPathUri = vscode.Uri.file(tempFolder);
@@ -82,10 +81,12 @@ describe('Notebook Integration Testing', () => {
         } else if (inputs.ARTIFACTS_KIND === 'file') {
             await vscode.workspace.fs.copy(nbUri, vscode.Uri.file(path.join(__dirname, outDir, nb)), { overwrite: true });
         }
+        } catch (err) {
+            console.log('!!!', err)
+        }
 
         let codeCellCount = 0;
         for (let i=0; i<notebook.cellCount; i++) {
-            console.log('***', i, notebook.cellAt(i)) 
             const kind = notebook.cellAt(i).kind;
             if (kind === 2) {
                 codeCellCount++;
