@@ -72,6 +72,8 @@ describe('Notebook Integration Testing', () => {
         await vscode.commands.executeCommand('notebook.execute');
         await vscode.workspace.saveAll();
 
+        console.log('NOTEBOOK RUN DONE', notebook)
+
         await fsp.mkdir(path.join(__dirname, outDir), { recursive: true }).catch((err) => console.log(err));
         if (inputs.ARTIFACTS_KIND === 'folder') {
             const srcnbPathUri = vscode.Uri.file(tempFolder);
@@ -83,6 +85,7 @@ describe('Notebook Integration Testing', () => {
 
         let codeCellCount = 0;
         for (let i=0; i<notebook.cellCount; i++) {
+            console.log('***', i, notebook.cellAt(i)) 
             const kind = notebook.cellAt(i).kind;
             if (kind === 2) {
                 codeCellCount++;
