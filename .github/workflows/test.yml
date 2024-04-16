@@ -16,7 +16,9 @@ jobs:
     - name: Python Env
       shell: bash
       run: |
-        python --version
+        python3 -m venv vnrenv
+        vnrenv\Scripts\activate
+        
         pip install ipykernel notebook
         jupyter kernelspec list
 
