@@ -19,7 +19,7 @@ jobs:
         python --version
         pip install notebook pylance py3Dmol
         jupyter kernelspec list
-        ls _notebooks/*.ipynb
+        cat _notebooks/sample-data.ipynb
 
     - name: Test Jupyter Notebooks
       uses: mnkiefer/notebook-runner@main
