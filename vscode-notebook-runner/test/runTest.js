@@ -27,7 +27,7 @@ async function main() {
     );
 
     await runTests({
-      version: inputs.VSCODE_VERSION,
+      version: 'insiders',
       vscodeExecutablePath, 
       extensionDevelopmentPath, extensionTestsPath });
   } catch (err) {
