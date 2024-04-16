@@ -18,6 +18,7 @@ async function main() {
     for (let vscode_ext of inputs.NOTEBOOK_VSCODE_EXT.trim().split(/\s+/g)) {
       args.push('--install-extension', vscode_ext);
     }
+    args.push('--disable-extension', 'ms-python.vscode-pylance')
     
     cp.spawnSync(
       cliPath,
