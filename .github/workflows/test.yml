@@ -17,9 +17,8 @@ jobs:
       shell: bash
       run: |
         python --version
-        pip install ipykernel notebook pylance py3Dmol
+        pip install ipykernel notebook
         jupyter kernelspec list
-        cat _notebooks/sample-data.ipynb
 
     - name: Test Jupyter Notebooks
       uses: mnkiefer/notebook-runner@main
