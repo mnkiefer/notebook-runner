@@ -17,7 +17,7 @@ jobs:
       shell: bash
       run: |
         python --version
-        pip install notebook pylance py3Dmol
+        pip install ipykernel notebook pylance py3Dmol
         jupyter kernelspec list
         cat _notebooks/sample-data.ipynb
 
