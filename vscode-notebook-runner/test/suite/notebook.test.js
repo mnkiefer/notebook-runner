@@ -69,9 +69,11 @@ describe('Notebook Integration Testing', () => {
         const getOutput = (index) => notebook.cellAt(index).outputs[0].items[0].data.toString().trim();
 
         await vscode.window.showNotebookDocument(notebook);
-        await vscode.commands.executeCommand('notebook.selectKernel', {
-            id: 'python3'
-        });
+        const activeEditor = this.notebooks.activeNotebookEditor;
+        await vscode.commands.executeComment('notebook.selectKernel', { notebookEditor: activeEditor });
+        //await vscode.commands.executeCommand('notebook.selectKernel', {
+        //    id: 'python3'
+        //});
         await vscode.executeCommand('notebook.selectKernel');
         await vscode.commands.executeCommand('notebook.execute');
         await vscode.workspace.saveAll();
