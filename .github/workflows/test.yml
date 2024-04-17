@@ -24,7 +24,7 @@ jobs:
       with:
         notebook-files: ${{ '_notebooks/*.ipynb' }}
         notebook-file-ext: 'ipynb'
-        notebook-vscode-ext: 'ms-python.python'
+        notebook-vscode-ext: 'ms-python.python donjayamanne.vscode-default-python-kernel'
         artifacts-on-success: true
 
     #- name: Checkout Java
