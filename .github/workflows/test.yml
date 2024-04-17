@@ -16,7 +16,7 @@ jobs:
     - name: Python
       shell: bash
       run: |
-        pip install jupyter
+        pip install ipython ipykernel
         jupyter kernelspec list
 
     - name: Test Jupyter Notebooks
