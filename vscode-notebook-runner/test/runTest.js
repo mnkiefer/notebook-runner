@@ -12,13 +12,12 @@ async function main() {
   try {
     const extensionDevelopmentPath = path.resolve(__dirname, '..');
     const extensionTestsPath = path.resolve(__dirname, './suite/index');
-    const vscodeExecutablePath = await downloadAndUnzipVSCode();
+    const vscodeExecutablePath = await downloadAndUnzipVSCode({ version: inputs.VSCODE_VERSION });
     const [cliPath, ...args] = resolveCliArgsFromVSCodeExecutablePath(vscodeExecutablePath);
 
     for (let vscode_ext of inputs.NOTEBOOK_VSCODE_EXT.trim().split(/\s+/g)) {
       args.push('--install-extension', vscode_ext);
     }
-    args.push('--disable-extension', 'ms-python.vscode-pylance')
     
     cp.spawnSync(
       cliPath,
@@ -27,7 +26,6 @@ async function main() {
     );
 
     await runTests({
-      version: 'insiders',
       vscodeExecutablePath, 
       extensionDevelopmentPath, extensionTestsPath });
   } catch (err) {
