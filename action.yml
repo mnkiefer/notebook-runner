@@ -59,9 +59,9 @@ runs:
         for file in ${{ inputs.notebook-files }}; do
           cp ../$file test/data
         done
-        which python
-        which python3
-        echo $PYTHONPATH
+
+        env PYTHONPATH=$(which python3)
+        pip3 install ipykernel
 
     - name: Run all Notebooks
       shell: bash
