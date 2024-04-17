@@ -52,7 +52,6 @@ runs:
 
         # Without self-hosted container, use ${{ github.action_path }} instead
         cp -r ${GITHUB_ACTION_PATH}/vscode-notebook-runner .
-        
         cd vscode-notebook-runner
         mkdir -p test/data
         for file in ${{ inputs.notebook-files }}; do
