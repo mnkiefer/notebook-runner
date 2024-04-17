@@ -20,15 +20,14 @@ jobs:
         python3 --version
         echo $PYTHONPATH
 
-    #- name: Test Jupyter Notebooks
-    #  uses: mnkiefer/notebook-runner@main
-    #  with:
-    #    notebook-files: ${{ '_notebooks/*.ipynb' }}
-    #    notebook-file-ext: 'ipynb'
-    #    notebook-vscode-ext: 'ms-python.python ms-toolsai.jupyter'
-    #    timeout: '300000'
-    #    vscode-version: 'insiders'
-    #    artifacts-on-success: true
+    - name: Test Jupyter Notebooks
+      uses: mnkiefer/notebook-runner@main
+      with:
+        notebook-files: ${{ '_notebooks/*.ipynb' }}
+        notebook-file-ext: 'ipynb'
+        notebook-vscode-ext: 'ms-python.python'
+        vscode-version: 'insiders'
+        artifacts-on-success: true
 
     #- name: Checkout Java
     #  uses: actions/setup-java@v4
