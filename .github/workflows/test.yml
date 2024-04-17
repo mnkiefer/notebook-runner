@@ -20,7 +20,7 @@ jobs:
         source vnr_env/bin/activate
         pip install ipykernel pylance notebook
         python -m ipykernel install --user --name vnr_env --display-name "Notebook Runner Env".
-        #jupyter kernelspec list
+        jupyter kernelspec list
 
     - name: Test Jupyter Notebooks
       uses: mnkiefer/notebook-runner@main
