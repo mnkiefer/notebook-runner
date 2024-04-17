@@ -13,12 +13,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Python Env
+    - name: Python
       shell: bash
       run: |
-        python --version
-        python3 --version
-        echo $PYTHONPATH
+        jupyter kernelspec list
 
     - name: Test Jupyter Notebooks
       uses: mnkiefer/notebook-runner@main
