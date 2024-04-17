@@ -48,6 +48,7 @@ runs:
         echo "NOTEBOOK_VSCODE_EXT=${{ inputs.notebook-vscode-ext }}" >> $GITHUB_ENV
         echo "NOTEBOOK_FILE_EXT=${{ inputs.notebook-file-ext }}" >> $GITHUB_ENV
         echo "ARTIFACTS_KIND=${{ inputs.artifacts-kind }}" >> $GITHUB_ENV
+        echo "VSCODE_VERSION=${{ inputs.vscode-version }}" >> $GITHUB_ENV
 
         # Without self-hosted container, use ${{ github.action_path }} instead
         cp -r ${GITHUB_ACTION_PATH}/vscode-notebook-runner .
