@@ -32,6 +32,9 @@ inputs:
     description: "Kind of artifacts to be created"
     required: false
     default: 'file'
+  vscode-version:
+    description: "VS Code version"
+    required: false
 
 runs:
   using: "composite"
@@ -54,13 +57,14 @@ runs:
         cp -r ${GITHUB_ACTION_PATH}/vscode-notebook-runner .
 
         cd vscode-notebook-runner
-        npm i -g @sap/cds-dk  --quiet --no-progress
         npm i  --quiet --no-progress
-
         mkdir -p test/data
         for file in ${{ inputs.notebook-files }}; do
           cp ../$file test/data
         done
+        which python
+        which python3
+        echo $PYTHONPATH
 
     - name: Run all Notebooks
       shell: bash
