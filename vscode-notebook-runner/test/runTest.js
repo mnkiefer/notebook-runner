@@ -12,7 +12,7 @@ async function main() {
   try {
     const extensionDevelopmentPath = path.resolve(__dirname, '..');
     const extensionTestsPath = path.resolve(__dirname, './suite/index');
-    const vscodeExecutablePath = await downloadAndUnzipVSCode();
+    const vscodeExecutablePath = await downloadAndUnzipVSCode({ version: inputs.VSCODE_VERSION });
     const [cliPath, ...args] = resolveCliArgsFromVSCodeExecutablePath(vscodeExecutablePath);
 
     for (let vscode_ext of inputs.NOTEBOOK_VSCODE_EXT.trim().split(/\s+/g)) {
@@ -26,7 +26,6 @@ async function main() {
     );
 
     await runTests({
-      version: inputs.VSCODE_VERSION,
       vscodeExecutablePath, 
       extensionDevelopmentPath, extensionTestsPath });
   } catch (err) {
