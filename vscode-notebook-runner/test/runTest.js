@@ -32,7 +32,7 @@ async function main() {
     });
   } catch (err) {
     console.error('Failed to run tests:');
-	  console.log(err);
+    console.log(err);
     process.exit(1);
   }
 }
