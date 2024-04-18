@@ -18,7 +18,6 @@ async function main() {
     for (let vscode_ext of inputs.NOTEBOOK_VSCODE_EXT.trim().split(/\s+/g)) {
       args.push('--install-extension', vscode_ext);
     }
-    args.push('--verbose');
     
     cp.spawnSync(
       cliPath,
@@ -32,7 +31,9 @@ async function main() {
       extensionTestsPath
     });
   } catch (err) {
-    throw (err);
+    console.error('Failed to run tests:');
+	  console.log(err);
+    process.exit(1);
   }
 }
 
