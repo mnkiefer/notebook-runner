@@ -10,6 +10,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+        cache: 'npm'
+
     - name: Checkout Java
       uses: actions/setup-java@v4
       with:
@@ -20,6 +26,9 @@ jobs:
       uses: stCarolas/setup-maven@v4.5
       with:
         maven-version: 3.8.2
+
+    - name: Install CAPs cds-dk
+      run: npm i -g @sap/cds-dk
   
     - name: Test 'Hello world' CAP Notebooks
       uses: mnkiefer/notebook-runner@main
@@ -32,16 +41,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Checkout Java
-      uses: actions/setup-java@v4
+    - name: Use Node.js
+      uses: actions/setup-node@v4
       with:
-        distribution: zulu
-        java-version: 20
+        node-version: 20.x
+        cache: 'npm'
 
-    - name: Set up Maven
-      uses: stCarolas/setup-maven@v4.5
-      with:
-        maven-version: 3.8.2
+    - name: Install CAPs cds-dk
+      run: npm i -g @sap/cds-dk
   
     - name: Test broken 'Hello world' CAP Notebook
       uses: mnkiefer/notebook-runner@main
