@@ -25,9 +25,11 @@ async function main() {
       { encoding: 'utf-8', stdio: 'inherit' }
     );
 
-    await runTests({
+    await runTests({ 
       vscodeExecutablePath, 
-      extensionDevelopmentPath, extensionTestsPath });
+      extensionDevelopmentPath,
+      extensionTestsPath
+    });
   } catch (err) {
     console.error('Failed to run tests:');
 	console.log(err);
