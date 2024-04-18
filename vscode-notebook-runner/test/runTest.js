@@ -26,7 +26,7 @@ async function main() {
       { encoding: 'utf-8', stdio: 'inherit' }
     );
 
-    await runTests({
+    await runTests({ 
       vscodeExecutablePath, 
       extensionDevelopmentPath,
       extensionTestsPath
