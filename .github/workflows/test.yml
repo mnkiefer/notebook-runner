@@ -10,10 +10,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
   
-    - name: Test 'Hello world' CAP Notebook
+    - name: Test 'Hello world' CAP Notebooks
       uses: mnkiefer/notebook-runner@main
       with:
-        notebook-files: 'test/helloWorld.capnb'
+        notebook-files: '_notebooks/hello-world_java.capnb _notebooks/hello-world_node.capnb'
         artifacts-on-success: true
 
   test_failure:
@@ -24,7 +24,7 @@ jobs:
     - name: Test broken 'Hello world' CAP Notebook
       uses: mnkiefer/notebook-runner@main
       with:
-        notebook-files: 'test/helloWorld.capnb test/jumpstart.capnb'
+        notebook-files: '_notebooks/broken.capnb'
       continue-on-error: true
 
     - name: Check for failure
