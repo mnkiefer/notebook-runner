@@ -1,8 +1,0 @@
-[
-    {
-        "kind": 2,
-        "language": "shell",
-        "value": "echoo \"Let's get started...!\"",
-        "outputs": []
-    }
-]

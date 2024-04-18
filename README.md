@@ -39,25 +39,26 @@ The only required *inputs* are a string of `notebook-files` to test.
 | `notebook-file-ext` | Notebook file extension | | `capnb` |
 | `notebook-vscode-ext` | VS Code Notebook extension to install | | `SAPSE.vscode-cds` |
 | `timeout` | Mocha timeout for VS Code tests | | `120000` |
-
-<!--
 | `vscode-version` | VS Code version to use | | `stable` |
 | `artifacts-on-success` | Upload artifacts on success | | `false` |
 | `artifacts-kind` | Copy folder to be uploaded as artifacts | | `file` |
--->
 
 ## Example usage
 
-Below is an example which shows how to use this action to test 2 sample [CAP Notebooks](https://cap.cloud.sap/docs/tools/#cap-vscode-notebook), which you can also find in this repository under the [_test_](https://github.com/mnkiefer/notebook-runner/tree/main/test) directory:
+Below is an example which shows how to use this action to test 2 sample [CAP Notebooks](https://cap.cloud.sap/docs/tools/#cap-vscode-notebook), which you can also find in this repository under the [*_notebooks*](https://github.com/mnkiefer/notebook-runner/tree/main/test) directory:
 
 ```yaml
 container:
-  # docker image containing xvfb
+  # Docker image containing xvfb
   image: sitespeedio/sitespeed.io
 
 steps:
+- name: Install CAP's cds-dk
+  run: |
+    npm i -g @sap/cds-dk
+
 - name: Test CAP Notebooks
   uses: mnkiefer/notebook-runner@main
     with:
-      notebook-files: "./test/hello-world.capnb ./test/jumpstart.capnb"
+      notebook-files: "_notebooks/hello-world_broken.capnb _notebooks/hello-world_node.capnb"
 ```
