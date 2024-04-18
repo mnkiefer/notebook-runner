@@ -9,6 +9,17 @@ jobs:
     runs-on: [ ubuntu-latest ]
     steps:
     - uses: actions/checkout@v4
+
+    - name: Checkout Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: zulu
+        java-version: 20
+
+    - name: Set up Maven
+      uses: stCarolas/setup-maven@v4.5
+      with:
+        maven-version: 3.8.2
   
     - name: Test 'Hello world' CAP Notebooks
       uses: mnkiefer/notebook-runner@main
@@ -20,6 +31,17 @@ jobs:
     runs-on: [ ubuntu-latest ]
     steps:
     - uses: actions/checkout@v4
+
+    - name: Checkout Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: zulu
+        java-version: 20
+
+    - name: Set up Maven
+      uses: stCarolas/setup-maven@v4.5
+      with:
+        maven-version: 3.8.2
   
     - name: Test broken 'Hello world' CAP Notebook
       uses: mnkiefer/notebook-runner@main
