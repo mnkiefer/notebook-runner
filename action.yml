@@ -15,7 +15,7 @@ inputs:
   notebook-vscode-ext:
     description: "Notebook VS Code extension"
     required: false
-    default: 'ms-toolsai.jupyter'
+    default: 'ms-python.python'
   vscode-version:
     description: "VS Code version"
     required: false
@@ -50,7 +50,6 @@ runs:
         echo "TIMEOUT=${{ inputs.timeout }}" >> $GITHUB_ENV
         echo "NOTEBOOK_VSCODE_EXT=${{ inputs.notebook-vscode-ext }}" >> $GITHUB_ENV
         echo "NOTEBOOK_FILE_EXT=${{ inputs.notebook-file-ext }}" >> $GITHUB_ENV
-        echo "VSCODE_VERSION=${{ inputs.vscode-version }}" >> $GITHUB_ENV
         echo "ARTIFACTS_KIND=${{ inputs.artifacts-kind }}" >> $GITHUB_ENV
         echo "VSCODE_VERSION=${{ inputs.vscode-version }}" >> $GITHUB_ENV
 
